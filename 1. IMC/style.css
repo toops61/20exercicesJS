@@ -1,0 +1,89 @@
+*,
+::before,
+::after {
+  /* comprend les padding !! */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 2vw;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Lato, Helvetica, sans-serif;
+  background: linear-gradient(to right, #36d1dc, #5b86e5);
+  padding: clamp(20px, 5vw, 50px) 10px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  background-color: #fff;
+  margin-top: 2em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 1.5em;
+}
+
+h1>span {
+  font-size: 1em;
+}
+
+span {
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em 0 1em;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1em;
+}
+
+input {
+  width: 15em;
+  height: 2em;
+  border: none;
+  padding: .5em;
+  border-radius: .3em;
+}
+
+
+button {
+  padding: .3em .5em;
+  background-color: rgb(255, 175, 27);
+  border-radius: .3em;
+  cursor: pointer;
+}
+
+input,button {
+  box-shadow: .2em .2em .3em rgb(129, 129, 129);
+}
+
+h3 {
+  margin: 2em 0 .5em;
+}
+
+@media screen and (max-width: 800px) {
+  form {
+    flex-direction: column;
+  }
+  * {
+    font-size: 4vw;
+  }
+}

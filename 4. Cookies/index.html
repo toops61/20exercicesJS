@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookies en JS</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="app.js" defer></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="alert-container hide">
+        <div class="alert-window"><p></p></div>
+      </div>
+      <h1><span>Création de</span> Cookies 🍪</h1>
+      <form>
+        <div class="input-container">
+          <label for="cookie-name">Son nom</label>
+          <input type="text" name="cookie-name" id="cookie-name">
+          <button class="reset">X</button>
+        </div>
+        <div class="input-container">
+          <label for="cookie-value">Sa valeur</label>
+          <input type="text" name="cookie-value" id="cookie-value">
+          <button class="reset">X</button>
+        </div>
+      </form>
+      <div class="buttons-container">
+        <button class="create-button">Créer</button>
+        <button class="display-button">Afficher</button>
+      </div>
+      <div class="cookie-container hide">
+      </div>
+    </main>
+  </body>
+</html>
