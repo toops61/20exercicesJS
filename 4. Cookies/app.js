@@ -31,7 +31,8 @@ const createCookie = () => {
     if (cookieName !== '' && cookieValue !== '') {
         const array = checkCookie();
         alertWindow(array.includes(cookieName) ? 'Vous avez modifié votre cookie' : 'Vous avez créé un nouveau cookie');
-        document.cookie = `${cookieName}=${cookieValue}; Secure;`;
+        const expirationDate = new Date(Date.now() + (7 * 24 * 60 * 60000));
+        document.cookie = `${cookieName}=${cookieValue}; expires=${expirationDate}; Secure;`;
     } else {
         alertWindow('Vous devez remplir les champs !');
     }
