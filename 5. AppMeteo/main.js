@@ -110,7 +110,9 @@ navigator.geolocation.getCurrentPosition(response => {
     lat = Math.round(response.coords.latitude*10000)/10000;
     lon = Math.round(response.coords.longitude*10000)/10000;
     comparePlaceDate();
-})
+}), () => {
+    alert('On ne peut vous donner la météo sans votre localisation. Autorisez la svp.')
+}
 //arrondir solution 2 : to fixed : lat = Number.parseFloat(response.coords.latitude).toFixed(4)
 
 //call API if position has changed or day or hour
