@@ -75,6 +75,17 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  padding: .5em 0;
+}
+
+.night {
+
+  background-color: black;
+}
+
+.night .meteo-container {
+  background-color: rgb(0, 0, 106);
+  color: white;
 }
 
 h1 span {
@@ -82,6 +93,7 @@ h1 span {
 }
 
 .down-part {
+  color: black;
   width: 100%;
   flex: 1;
   background-color: #fff;
@@ -107,7 +119,7 @@ h1 span {
 
 .logo img {
   object-fit: contain;
-  height: 200%;
+  height: 150%;
 }
 
 .temp {

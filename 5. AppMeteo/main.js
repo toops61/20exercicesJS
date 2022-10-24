@@ -1,6 +1,7 @@
 const apiKey = 'faca82f7062c34e7ff76ac86506ada5b';
-const lat = 45.771952;
-const long = 4.890167;
+//default coordinates
+let lat = 45.772;
+let lon = 4.8902;
 
 /* const meteoCall = () => {
     fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=${apiKey}`)
@@ -15,7 +16,7 @@ let arrayDays = [];
 async function meteoCall() {
     document.querySelector('.loader').classList.remove('hide');
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${long}&exclude=minutely&appid=${apiKey}`);
+        const response = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${apiKey}`);
         if (!response.ok) {
             throw new Error(`Erreur HTTP : ${response.status}`);
         }
@@ -26,6 +27,7 @@ async function meteoCall() {
         arrayHours = fillHoursTemp(json);
         arrayDays = fillDaysTemp(json);
         hoursTempDisplay();
+        fillLocation();
         document.querySelector('.loader').classList.add('hide');
     } catch (error) {
         console.error(error);
@@ -37,6 +39,7 @@ const convertDt = dateTime => new Date(dateTime*1000).getHours()+'h';
 const fillIcon = result => {
     const icon =  result.current.weather[0].icon;
     const day = icon.includes('d') ? 'jour' : 'nuit';
+    icon.includes('d') ? document.querySelector('main').classList.remove('night') : document.querySelector('main').classList.add('night');
     document.querySelector('.logo img').src = `./ressources/${day}/${icon}.svg`;
 }
 
@@ -68,10 +71,6 @@ const fillDaysTemp = result => {
     return arrayTemp;
 }
 
-const fillTab = () => {
-
-}
-
 const buttonDays = document.querySelector('.days-button');
 const buttonHours = document.querySelector('.hours-button');
 
@@ -97,19 +96,35 @@ const daysTempDisplay = () => {
     }
 }
 
+const fillLocation = () => {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.querySelector('.place').textContent = timeZone;
+}
+
 buttonHours.addEventListener('click',hoursTempDisplay);
 buttonDays.addEventListener('click',daysTempDisplay);
 
 const result = JSON.parse(sessionStorage.getItem('APIresult'));
 
-if (result && new Date(result.current.dt*1000).getDate() === new Date().getDate() && new Date(result.current.dt*1000).getHours() === new Date().getHours()) {
-    fillIcon(result);
-    fillCurrentInfos(result);
-    arrayHours = fillHoursTemp(result);
-    arrayDays = fillDaysTemp(result);
-    hoursTempDisplay();
-} else {
-    meteoCall();
+navigator.geolocation.getCurrentPosition(response => {
+    lat = Math.round(response.coords.latitude*10000)/10000;
+    lon = Math.round(response.coords.longitude*10000)/10000;
+    comparePlaceDate();
+})
+//arrondir solution 2 : to fixed : lat = Number.parseFloat(response.coords.latitude).toFixed(4)
+
+//call API if position has changed or day or hour
+const comparePlaceDate = () => {
+    if (result && (new Date(result.current.dt*1000).getDate() === new Date().getDate()) && (new Date(result.current.dt*1000).getHours() === new Date().getHours()) && (result.lat == lat) && (result.lon == lon)) {
+        fillIcon(result);
+        fillCurrentInfos(result);
+        arrayHours = fillHoursTemp(result);
+        arrayDays = fillDaysTemp(result);
+        hoursTempDisplay();
+        fillLocation();
+    } else {
+        meteoCall();
+    }
 }
 
 /* const testAPIGouv = () => {
