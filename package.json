@@ -1,0 +1,22 @@
+{
+  "name": "20-projets_js",
+  "version": "1.0.0",
+  "description": "js exercices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toops61/20exercicesJS.git"
+  },
+  "author": "Toops",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toops61/20exercicesJS/issues"
+  },
+  "homepage": "https://github.com/toops61/20exercicesJS#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}

@@ -1,4 +1,3 @@
-const apiKey = '';
 //default coordinates
 let lat = 45.772;
 let lon = 4.8902;
@@ -125,7 +124,7 @@ const comparePlaceDate = () => {
         hoursTempDisplay();
         fillLocation();
     } else {
-        meteoCall();
+        //meteoCall();
     }
 }
 
