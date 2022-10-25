@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Couleurs fun JavaScript</title>
+    <script src="app.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <script src="app.js"></script>
+    <main>
+        <input type="color" name="color-one" id="color-one" class="input-color">
+        <input type="color" name="color-two" id="color-two" class="input-color">
+        <label for="orientation"><h2>orientation : </h2><p></p></label>
+        <input type="range" name="orientation" id="orientation" min="0" max="360">
+        <div class="buttons-container">
+            <button>Copier</button>
+            <button>Random</button>
+        </div>
+            
+    </main>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const apiKey = 'faca82f7062c34e7ff76ac86506ada5b';
+const apiKey = '';
 //default coordinates
 let lat = 45.772;
 let lon = 4.8902;

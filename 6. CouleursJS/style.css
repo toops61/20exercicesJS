@@ -4,11 +4,29 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 2vw;
 }
 
 body {
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   background: #333;
-  padding: clamp(20px, 20vw, 200px) 20px 0;
+  /* padding: clamp(20px, 20vw, 200px) 20px 0; */
+}
+
+main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(90deg,#e66465, #9198e5);
+}
+
+.input-color {
+  width: 15em;
+  height: 2em;
+  border-radius: .5em;
 }

@@ -1,0 +1,1 @@
+document.querySelector('#color-one').addEventListener('input',e => console.log(e))
