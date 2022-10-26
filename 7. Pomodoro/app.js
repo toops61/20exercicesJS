@@ -76,11 +76,13 @@ const resetTimers = () => {
     cycle = 1;
     displayTimers();
     play = false;
+    document.querySelectorAll('button')[0].className = !play ? 'play' : 'pause';
 }
 
 const pausePlay = () => {
     workTimer == 0 ? setTimerRest() : setTimerWork();
+    document.querySelectorAll('button')[0].className = !play ? 'play' : 'pause';
 }
 
-document.querySelector('.play').addEventListener('click',pausePlay);
+document.querySelectorAll('button')[0].addEventListener('click',pausePlay);
 document.querySelector('.reset').addEventListener('click',resetTimers);
