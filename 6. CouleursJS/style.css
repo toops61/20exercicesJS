@@ -22,11 +22,62 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(90deg,#e66465, #9198e5);
+  background: linear-gradient(180deg,#e66465, #9198e5);
 }
 
 .input-color {
   width: 15em;
   height: 2em;
   border-radius: .5em;
+  margin: .5em 0;
+}
+
+.color-container {
+  position: relative;
+}
+
+.color-label {
+  color: white;
+  position: absolute;
+  left: .6em;
+  top: .9em;
+}
+
+.label-orientation {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(218, 218, 218);
+  padding: .3em .6em;
+  border-radius: .3em;
+  width: fit-content;
+}
+
+.label-orientation p {
+  font-size: .8em;
+  margin-left: .5em;
+}
+
+label h2 {
+  font-size: .9em;
+}
+
+#orientation {
+  width: 15em;
+}
+
+.range-container {
+  margin: 1em 0; 
+}
+
+button {
+  padding: .3em .8em;
+  background-color: rgb(218, 218, 218);
+  border: none;
+  border-radius: .3em;
+  box-shadow: .1em .1em .2em rgb(98, 98, 98);
+  margin: 0 .5em;
+}
+
+button p {
+  font-size: .7em;
 }

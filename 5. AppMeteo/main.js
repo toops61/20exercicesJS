@@ -124,7 +124,7 @@ const comparePlaceDate = () => {
         hoursTempDisplay();
         fillLocation();
     } else {
-        //meteoCall();
+        meteoCall();
     }
 }
 
