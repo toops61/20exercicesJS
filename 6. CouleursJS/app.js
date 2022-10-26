@@ -13,23 +13,24 @@ const hexToRgb = hex => {
     const r = parseInt(result[1], 16);
     const g = parseInt(result[2], 16);
     const b = parseInt(result[3], 16);
-    return r+g+b;
+    const yiq = (r*299 + g*587 + b*144) / 1000;
+    return yiq;
 }
 
 const colorOneCont = document.querySelector('#color_one');
 const colorTwoCont = document.querySelector('#color_two');
 const orientationDiv = document.querySelector('#orientation');
 
+const fillColorInputs = (section,color) => {
+    section.labels[0].children[0].textContent = color;
+    section.labels[0].style.backgroundColor = color;
+    section.labels[0].children[0].style.color = hexToRgb(color) > 128 ? 'black' : 'white';
+}
+
 const applyColor = id => {
     id.includes('orientation') && (document.querySelector('.label-orientation p').textContent = `${objectColor.orientation}°`);
-    if (id.includes('color_one')) {
-        colorOneCont.labels[0].children[0].textContent = objectColor.color_one;
-        colorOneCont.labels[0].children[0].style.color = hexToRgb(objectColor.color_one) > 410 ? 'black' : 'white';
-    }
-    if (id.includes('color_two')) {
-        colorTwoCont.labels[0].children[0].textContent = objectColor.color_two;
-        colorTwoCont.labels[0].children[0].style.color = hexToRgb(objectColor.color_two) > 410 ? 'black' : 'white';
-    } 
+    id.includes('color_one') && fillColorInputs(colorOneCont,objectColor.color_one);
+    id.includes('color_two') && fillColorInputs(colorTwoCont,objectColor.color_two);
 }
 
 const getParams = e => {
@@ -54,7 +55,8 @@ const randomFunc = max => Math.floor(Math.random() * max);
 
 const randomColor = () => {
     let [r,g,b] = ['r','g','b'].map(e => randomFunc(256));
-    colorOneCont.labels[0].children[0].style.color = r+g+b > 410 ? 'black' : 'white';
+    const yiq = (r*299 + g*587 + b*144) / 1000;
+    colorOneCont.labels[0].children[0].style.color = yiq > 128 ? 'black' : 'white';
     objectColor.color_one = rgbToHex(r,g,b);
     applyColor('color_one');
     colorOneCont.value = objectColor.color_one;

@@ -8,10 +8,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400;600;800&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <script src="app.js" defer></script>
   </head>
   <body>
-
-
-    <script src="app.js"></script>
+    <main>
+      <h1><span>Le </span>POMODORO</h1>
+      <section class="timers-container">
+        <div class="timer work">
+          <h2>Travail</h2>
+          <div class="animation-time"></div>
+          <p class="work__time">30:00</p>
+        </div>
+        <div class="timer rest">
+          <h2>Repos</h2>
+          <div class="animation-time"></div>
+          <p class="rest__time">5:00</p>
+        </div>
+      </section>
+      <section class="buttons-container">
+        <button class="play"></button>
+        <button class="reset"></button>
+      </section>
+      <p class="cycle-container">Cycle : O</p>
+    </main>
   </body>
 </html>

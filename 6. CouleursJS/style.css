@@ -22,26 +22,29 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(180deg,#e66465, #9198e5);
+  background: linear-gradient(180deg,#fff, #fff);
 }
 
-.input-color {
+.color-label {
+  color: white;
+  border-radius: .5em;
+  display: flex;
+  align-items: center;
+  padding: .3em .5em;
   width: 15em;
   height: 2em;
-  border-radius: .5em;
+  border: .1em solid;
   margin: .5em 0;
+  background-color: #000;
+}
+.input-color {
+  display: none;
 }
 
 .color-container {
   position: relative;
 }
 
-.color-label {
-  color: white;
-  position: absolute;
-  left: .6em;
-  top: .9em;
-}
 
 .label-orientation {
   display: flex;
@@ -50,6 +53,7 @@ main {
   padding: .3em .6em;
   border-radius: .3em;
   width: fit-content;
+  margin-bottom: .5em;
 }
 
 .label-orientation p {
