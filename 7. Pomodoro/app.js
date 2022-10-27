@@ -2,23 +2,30 @@ let workTimer = 1800;
 let restTimer = 300;
 let cycle = 1;
 
-let workTimerIntervall = null;
-let restTimerIntervall = null;
+let workTimerInterval = null;
+let restTimerInterval = null;
+
+const divAnimArray = document.querySelectorAll('.title-container div');
+const containerAnimArray = document.querySelectorAll('.timer');
 
 const clearAllTimer = () => {
-    clearInterval(workTimerIntervall);
-    workTimerIntervall = null;
-    clearInterval(restTimerIntervall);
-    restTimerIntervall = null;
+    clearInterval(workTimerInterval);
+    workTimerInterval = null;
+    clearInterval(restTimerInterval);
+    restTimerInterval = null;
     play = false;
 }
 
 let play = false;
 
+const checkStatus = () => {
+    document.querySelectorAll('button')[0].className = !play ? 'play' : 'pause';
+}
+
 const formatTimer = timer => {
     const minutes = Math.floor(timer / 60);
     const secondes = timer % 60;
-    return `${minutes}:${secondes > 10 ? secondes : ('0'+secondes)}`;
+    return `${minutes}:${secondes >= 10 ? secondes : ('0'+secondes)}`;
 }
 
 const displayTimers = () => {
@@ -27,45 +34,59 @@ const displayTimers = () => {
 }
 
 const setTimerRest = () => {
+    !divAnimArray[1].className.includes('animation-time') && (divAnimArray[1].className = 'animation-time');
+    !containerAnimArray[1].className.includes('selected') && containerAnimArray[1].classList.add('selected');
     if (!play) {
         play = true;
-        !restTimerIntervall && (
-            restTimerIntervall = setInterval(() => {
+        divAnimArray[1].classList.add('animation');
+        !restTimerInterval && (
+            restTimerInterval = setInterval(() => {
                 if (restTimer > 0) {
                     restTimer--;
                     document.querySelector('.rest__time').textContent = formatTimer(restTimer);
                 } else {
                     resetTimers();
                     cycle++;
+                    divAnimArray[1].className = '';
+                    containerAnimArray[1].classList.remove('selected')
                     setTimerWork();
                 }
             }, 1000))
         } else {
             play = false;
-            clearInterval(restTimerIntervall);
-            restTimerIntervall = null;
+            divAnimArray[1].classList.remove('animation');
+            clearInterval(restTimerInterval);
+            restTimerInterval = null;
         }
     }
     
 const setTimerWork = () => {
     document.querySelector('.cycle-container').textContent = `Cycle : ${cycle}`;
+    !divAnimArray[0].className.includes('animation-time') && (divAnimArray[0].className = 'animation-time');
+    !containerAnimArray[0].className.includes('selected') && containerAnimArray[0].classList.add('selected');
     if (!play) {
         play = true;
-        !workTimerIntervall && (
-            workTimerIntervall = setInterval(() => {
-            if (workTimer > 0) {
-                workTimer--;
-                document.querySelector('.work__time').textContent = formatTimer(workTimer);
-            } else {
-                play = false;
-                clearAllTimer();
-                setTimerRest();
-            }
-        }, 1000))
+        divAnimArray[0].classList.add('animation');
+        workTimer == 1800 && checkStatus();
+        !workTimerInterval && (
+            workTimerInterval = setInterval(() => {
+                if (workTimer > 0) {
+                    workTimer--;
+                    document.querySelector('.work__time').textContent = formatTimer(workTimer);
+                } else {
+                    play = false;
+                    clearAllTimer();
+                    setTimerRest();
+                    divAnimArray[0].className = '';
+                    containerAnimArray[0].classList.remove('selected')
+                }
+            }, 1000)
+        )
     } else {
         play = false;
-        clearInterval(workTimerIntervall);
-        workTimerIntervall = null;
+        divAnimArray[0].classList.remove('animation');
+        clearInterval(workTimerInterval);
+        workTimerInterval = null;
     }
 }
 
@@ -76,12 +97,16 @@ const resetTimers = () => {
     cycle = 1;
     displayTimers();
     play = false;
-    document.querySelectorAll('button')[0].className = !play ? 'play' : 'pause';
+    checkStatus();
+    divAnimArray[0].className = '';
+    divAnimArray[1].className = '';
+    containerAnimArray[0].className = 'timer';
+    containerAnimArray[1].className = 'timer';
 }
 
 const pausePlay = () => {
     workTimer == 0 ? setTimerRest() : setTimerWork();
-    document.querySelectorAll('button')[0].className = !play ? 'play' : 'pause';
+    checkStatus();
 }
 
 document.querySelectorAll('button')[0].addEventListener('click',pausePlay);

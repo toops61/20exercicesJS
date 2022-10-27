@@ -25,6 +25,15 @@
     src: url("../fonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-brands-400.woff2") format("woff2"), url("../fonts/fa-brands-400.woff") format("woff"), url("../fonts/fa-brands-400.ttf") format("truetype"), url("../fonts/fa-brands-400.svg#fontawesome") format("svg");
 }
 
+@keyframes anim-line {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 *,
 ::before,
 ::after {
@@ -52,8 +61,24 @@ main {
   flex-direction: column;
 }
 
+.title {
+  display: flex;
+  align-items:flex-end;
+}
+
+.title p {
+  font-size: 1.4em;
+}
+
 h1 {
-  
+  font-size: 1.4em;
+  text-decoration: underline;
+  margin-left: .5em;
+}
+
+h1 span {
+  font-weight: normal;
+  text-decoration: none;
 }
 
 .timers-container {
@@ -70,7 +95,31 @@ h1 {
   padding: 1em 3em;
   background-color: rgb(230, 230, 230);
   margin: 0 .2em;
-  box-shadow: .1em .1em .2em rgb(170, 170, 170);
+  box-shadow: .1em .1em .2em rgb(134, 134, 134);
+  border-radius: .5em;
+}
+
+.selected {
+  background-color: #fff;
+}
+
+.title-container {
+  overflow: hidden;
+}
+
+.title-container div {
+  background-color: black;
+  width: 100%;
+  height: .1em;
+  opacity: 0;
+}
+
+.title-container .animation-time {
+  opacity: 1;
+}
+
+.animation {
+  animation: anim-line 1s forwards linear infinite;
 }
 
 .buttons-container {
@@ -86,7 +135,13 @@ button {
   align-items: center;
   margin: 0 .2em;
   border: none;
-  box-shadow: .1em .1em .2em rgb(170, 170, 170);
+  box-shadow: .2em .2em .2em rgb(170, 170, 170);
+  color: white;
+  background-color: #008080;
+}
+
+.pause {
+  box-shadow: .05em .05em .1em rgb(170, 170, 170);
 }
 
 .play::before {
