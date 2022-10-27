@@ -1,19 +1,17 @@
 let workTimer = 1800;
 let restTimer = 300;
-let cycle = 1;
+let cycle = 0;
 
 let workTimerInterval = null;
 let restTimerInterval = null;
+let timerInterval = null;
 
 const divAnimArray = document.querySelectorAll('.title-container div');
 const containerAnimArray = document.querySelectorAll('.timer');
 
-const clearAllTimer = () => {
-    clearInterval(workTimerInterval);
-    workTimerInterval = null;
-    clearInterval(restTimerInterval);
-    restTimerInterval = null;
-    play = false;
+const clearTimer = () => {
+    clearInterval(timerInterval);
+    timerInterval = null;
 }
 
 let play = false;
@@ -33,68 +31,50 @@ const displayTimers = () => {
     document.querySelector('.work__time').textContent = formatTimer(workTimer);
 }
 
-const setTimerRest = () => {
-    !divAnimArray[1].className.includes('animation-time') && (divAnimArray[1].className = 'animation-time');
-    !containerAnimArray[1].className.includes('selected') && containerAnimArray[1].classList.add('selected');
-    if (!play) {
-        play = true;
-        divAnimArray[1].classList.add('animation');
-        !restTimerInterval && (
-            restTimerInterval = setInterval(() => {
-                if (restTimer > 0) {
-                    restTimer--;
-                    document.querySelector('.rest__time').textContent = formatTimer(restTimer);
-                } else {
-                    resetTimers();
-                    cycle++;
-                    divAnimArray[1].className = '';
-                    containerAnimArray[1].classList.remove('selected')
-                    setTimerWork();
-                }
-            }, 1000))
-        } else {
-            play = false;
-            divAnimArray[1].classList.remove('animation');
-            clearInterval(restTimerInterval);
-            restTimerInterval = null;
-        }
+const decreaseFunc = ind => {
+    let timer = ind == 0 ? workTimer : restTimer;
+    if (timer > 0) {
+        ind == 0 ? workTimer-- : restTimer--;
+        displayTimers();
+    } else {
+        play = false;
+        ind == 0 ? clearTimer() : endCycle();
+        ind == 0 ? setTimer(1) : setTimer(0);
+        divAnimArray[ind].className = '';
+        containerAnimArray[ind].classList.remove('selected')
     }
-    
-const setTimerWork = () => {
+}
+
+const setTimer = index => {
+    let timer = index == 0 ? workTimer : restTimer;
+    timer == 1800 && cycle++;
     document.querySelector('.cycle-container').textContent = `Cycle : ${cycle}`;
-    !divAnimArray[0].className.includes('animation-time') && (divAnimArray[0].className = 'animation-time');
-    !containerAnimArray[0].className.includes('selected') && containerAnimArray[0].classList.add('selected');
+    const init = index == 0 ? 1800 : 300;
+    restTimer == init && timer--;
+    displayTimers();
+    !divAnimArray[index].className.includes('animation-time') && (divAnimArray[index].className = 'animation-time');
+    !containerAnimArray[index].className.includes('selected') && containerAnimArray[index].classList.add('selected');
     if (!play) {
         play = true;
-        divAnimArray[0].classList.add('animation');
-        workTimer == 1800 && checkStatus();
-        !workTimerInterval && (
-            workTimerInterval = setInterval(() => {
-                if (workTimer > 0) {
-                    workTimer--;
-                    document.querySelector('.work__time').textContent = formatTimer(workTimer);
-                } else {
-                    play = false;
-                    clearAllTimer();
-                    setTimerRest();
-                    divAnimArray[0].className = '';
-                    containerAnimArray[0].classList.remove('selected')
-                }
+        checkStatus();
+        divAnimArray[index].classList.add('animation');
+        !timerInterval && (
+            timerInterval = setInterval(() => {
+                decreaseFunc(index);
             }, 1000)
         )
     } else {
         play = false;
-        divAnimArray[0].classList.remove('animation');
-        clearInterval(workTimerInterval);
-        workTimerInterval = null;
+        divAnimArray[index].classList.remove('animation');
+        clearInterval(timerInterval);
+        timerInterval = null;
     }
 }
 
-const resetTimers = () => {
-    clearAllTimer();
+const endCycle = () => {
+    clearTimer();
     workTimer = 1800;
     restTimer = 300;
-    cycle = 1;
     displayTimers();
     play = false;
     checkStatus();
@@ -104,8 +84,14 @@ const resetTimers = () => {
     containerAnimArray[1].className = 'timer';
 }
 
+const resetTimers = () => {
+    cycle = 0;
+    document.querySelector('.cycle-container').textContent = `Cycle : ${cycle}`;
+    endCycle();
+}
+
 const pausePlay = () => {
-    workTimer == 0 ? setTimerRest() : setTimerWork();
+    workTimer == 0 ? setTimer(1) : setTimer(0);
     checkStatus();
 }
 

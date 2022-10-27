@@ -8,5 +8,15 @@ body {
     min-height: 100vh;
     background: linear-gradient(to right, #d9a7c7, #fffcdc); 
     font-family: Open sans, Helvetica, sans-serif;
-    padding: clamp(20px, 5vw, 50px) 10px;
+    /* padding: clamp(20px, 5vw, 50px) 10px; */
 }
+
+main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
