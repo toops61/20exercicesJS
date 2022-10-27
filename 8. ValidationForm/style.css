@@ -2,21 +2,83 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-size: 1.5vw;
 }
 
 body {
     min-height: 100vh;
     background: linear-gradient(to right, #d9a7c7, #fffcdc); 
     font-family: Open sans, Helvetica, sans-serif;
-    /* padding: clamp(20px, 5vw, 50px) 10px; */
+    padding: clamp(20px, 5vw, 50px) 10px;
 }
 
 main {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(26, 0, 0);
+    color: rgb(242, 225, 225);
+    width: 27em;
+    padding: 1em;
+}
+
+.input-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: .8em 0;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid .2em grey;
+    padding: .2em 0;
+}
+
+input::placeholder {
+    font-size: .8em;
+}
+
+.attention {
+    position: absolute;
+    top: 35%;
+    right: 0;
+    color: rgb(26, 0, 0);
+    background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-  }
+    border-radius: 50%;
+    width: 1.2em;
+    height: 1.2em;
+    font-weight: bold;
+}
+
+.input-infos {
+    color: red;
+    font-size: .8em;
+}
+
+.valid .attention {
+    display: none;
+}
+
+.valid .input-infos {
+    display: none;
+}
+
+button {
+    padding: .5em;
+    border-radius: .4em;
+    border: none;
+    background-color: #fdfbe3;
+    margin: .8em 0;
+}
