@@ -22,24 +22,33 @@
             <label for="pseudo">Nom d'utilisateur</label>
             <input type="text" name="pseudo" id="pseudo" autocomplete="name" minlength="3" placeholder="3 caractères minimum" required>
             <div class="attention"><p>!</p></div>
+            <div class="check"></div>
             <p class="input-infos">Choisissez un pseudo contenant au moins trois caractères.</p>
           </div>
           <div class="input-container">
             <label for="email">Entrez votre email</label>
             <input type="email" name="email" id="email" autocomplete="email" placeholder="Votre email" required>
             <div class="attention"><p>!</p></div>
+            <div class="check"></div>
             <p class="input-infos">Rentrez un email valide.</p>
           </div>
           <div class="input-container">
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" placeholder="Votre mot de passe" required>
             <div class="attention"><p>!</p></div>
+            <div class="check"></div>
             <p class="input-infos">Au moins un symbole, un chiffre et 6 caractères minimum</p>
+            <div class="password-level hide">
+              <div class="level"><p>faible</p></div>
+              <div class="level"><p>moyen</p></div>
+              <div class="level"><p>fort</p></div>
+            </div>
           </div>
           <div class="input-container">
             <label for="confirm-password">confirmez le mot de passe</label>
             <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmez votre mot de passe" required>
             <div class="attention"><p>!</p></div>
+            <div class="check"></div>
           </div>
           <button>Création du compte</button>
         </form>

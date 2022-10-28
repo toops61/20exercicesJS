@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Font Awesome 5';
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url("../fonts/fa-solid-900.eot");
+    src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
@@ -62,6 +71,27 @@ input::placeholder {
     font-weight: bold;
 }
 
+.check {
+    position: absolute;
+    top: 45%;
+    right: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.check::before {
+    content: '\f058';
+    font-family: 'Font Awesome 5';
+    font-weight: 400;
+    font-size: 1.3em;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    color: green;
+}
+
 .input-infos {
     color: red;
     font-size: .8em;
@@ -71,8 +101,44 @@ input::placeholder {
     display: none;
 }
 
+.valid .check {
+    display: flex;
+}
+
 .valid .input-infos {
     display: none;
+}
+
+.password-level {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: .5em .3em 0;
+}
+
+.level::before {
+    content: '';
+    width: 6em;
+    height: .2em;
+    background-color: rgb(255, 208, 1);
+}
+
+.level:first-child::before {
+    background-color: rgb(197, 55, 11);
+}
+.level:last-child::before {
+    background-color: rgb(1, 140, 22);
+}
+
+.level p {
+    font-size: .8em;
 }
 
 button {
@@ -81,4 +147,8 @@ button {
     border: none;
     background-color: #fdfbe3;
     margin: .8em 0;
+}
+
+.hide {
+    display: none;
 }
