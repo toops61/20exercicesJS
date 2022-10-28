@@ -33,7 +33,7 @@ form {
     justify-content: center;
     background-color: rgb(26, 0, 0);
     color: rgb(242, 225, 225);
-    width: 27em;
+    width: 35em;
     padding: 1em;
 }
 
@@ -49,7 +49,8 @@ input {
     background-color: transparent;
     border: none;
     border-bottom: solid .2em grey;
-    padding: .2em 0;
+    padding: .2em .5em;
+    color: rgb(242, 225, 225);
 }
 
 input::placeholder {

@@ -16,7 +16,7 @@
   <body>
     <main>
       <section class="form-container">
-        <form action="submit">
+        <form>
           <h1>Inscrivez-vous</h1>
           <div class="input-container">
             <label for="pseudo">Nom d'utilisateur</label>
@@ -37,7 +37,7 @@
             <input type="password" name="password" id="password" placeholder="Votre mot de passe" required>
             <div class="attention"><p>!</p></div>
             <div class="check"></div>
-            <p class="input-infos">Au moins un symbole, un chiffre et 6 caractères minimum</p>
+            <p class="input-infos">Au moins un symbole, un chiffre, une majuscule et 6 caractères minimum</p>
             <div class="password-level hide">
               <div class="level"><p>faible</p></div>
               <div class="level"><p>moyen</p></div>
@@ -50,7 +50,7 @@
             <div class="attention"><p>!</p></div>
             <div class="check"></div>
           </div>
-          <button>Création du compte</button>
+          <button type="submit">Création du compte</button>
         </form>
       </section>
     </main>
