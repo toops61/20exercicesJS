@@ -15,6 +15,12 @@
   </head>
   <body>
     <main>
+      <div class="alert-window hide">
+        <div class="alert-container">
+          <h2></h2>
+          <p></p>
+        </div>
+      </div>
       <section class="form-container">
         <form>
           <h1>Inscrivez-vous</h1>
@@ -40,8 +46,8 @@
             <p class="input-infos">Au moins un symbole, un chiffre, une majuscule et 6 caractères minimum</p>
             <div class="password-level hide">
               <div class="level"><p>faible</p></div>
-              <div class="level"><p>moyen</p></div>
-              <div class="level"><p>fort</p></div>
+              <div class="level hide-level"><p>moyen</p></div>
+              <div class="level hide-level"><p>fort</p></div>
             </div>
           </div>
           <div class="input-container">
@@ -49,6 +55,7 @@
             <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmez votre mot de passe" required>
             <div class="attention"><p>!</p></div>
             <div class="check"></div>
+            <p class="input-infos">Le mot de passe n'est pas identique</p>
           </div>
           <button type="submit">Création du compte</button>
         </form>

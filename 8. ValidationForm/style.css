@@ -21,6 +21,45 @@ body {
     padding: clamp(20px, 5vw, 50px) 10px;
 }
 
+.alert-window {
+    z-index: 99;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255,255,255,.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-container {
+    position: relative;
+    background-color: rgb(0, 98, 0);
+    color: white;
+    text-shadow: .1em .1em .1em black;
+    padding: 4em;
+    border-radius: 1em;
+    border: solid;
+    box-shadow: 0 0 .7em black;
+}
+
+.alert-container h2 {
+    font-size: 1.5em;
+}
+
+.alert-container p {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+.alert-container.alert {
+    background-color: rgb(214, 0, 0);
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -59,11 +98,11 @@ input::placeholder {
 
 .attention {
     position: absolute;
-    top: 35%;
+    top: 1.4em;
     right: 0;
     color: rgb(26, 0, 0);
     background-color: red;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -74,7 +113,7 @@ input::placeholder {
 
 .check {
     position: absolute;
-    top: 45%;
+    top: 1.4em;
     right: 0;
     display: none;
     justify-content: center;
@@ -96,18 +135,20 @@ input::placeholder {
 .input-infos {
     color: red;
     font-size: .8em;
+    display: none;
 }
 
-.valid .attention {
-    display: none;
+
+.invalid .attention {
+    display: flex;
 }
 
 .valid .check {
     display: flex;
 }
 
-.valid .input-infos {
-    display: none;
+.invalid .input-infos {
+    display: flex;
 }
 
 .password-level {
@@ -122,6 +163,7 @@ input::placeholder {
     flex-direction: column;
     align-items: center;
     margin: .5em .3em 0;
+    opacity: 1;
 }
 
 .level::before {
@@ -152,4 +194,8 @@ button {
 
 .hide {
     display: none;
+}
+
+.hide-level {
+    opacity: 0;
 }
