@@ -1,24 +1,94 @@
 let cardDivArray;
 
+let timerInterval = null;
+
 let arrayImages = [];
 
 let totalShots = 0;
+let timer = 0;
 
-const winningAlert = () => {
-    setTimeout(() => {
-        alert('BRAVO !!! c\'est gagné');
-        resetAll();
+let arrayTimers = localStorage.timersMemory ? JSON.parse(localStorage.getItem('timersMemory')) : [];
+
+
+const displayBestTimers = () => {
+    document.querySelector('.best-timers').replaceChildren();
+    arrayTimers.map(e => {
+        const minutes = Math.floor(e.time / 60);
+        const seconds = e.time % 60;
+        document.querySelector('.best-timers').innerHTML += `<div class="timer-classment"><div class="present-timer hide">-></div><p>${e.date} ${minutes}:${seconds < 10 ? 0 : ''}${seconds}</p></div>`;
+    })
+    const indexArray = [];
+    arrayTimers.find((e,index) => {
+        if (e.time === timer) {
+            indexArray.push(index);
+        }
+    })
+    document.querySelectorAll('.present-timer')[indexArray[0]].classList.remove('hide');
+}
+
+const sortTimers = () => {
+    arrayTimers.sort((a,b) => a.time-b.time);
+}
+
+const convertTimer = () => {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    document.querySelector('.chrono-container p').textContent = `${minutes}:${seconds < 10 ? 0 : ''}${seconds}`;
+}
+
+const timerDisplay = () => {
+    timerInterval = setInterval(() => {
+        timer++;
+        convertTimer();
     }, 1000);
 }
 
+const resetAllTimers = () => {
+    if (window.confirm('Voulez-vous vraiment effacer tous les scores ?')) {
+        localStorage.setItem('timersMemory',JSON.stringify([]));
+        arrayTimers = [];
+    }
+}
+
+const closeAlert = () => {
+    document.querySelector('.alert-window').classList.add('hide');
+}
+
+document.querySelector('.alert-container .close').addEventListener('click',closeAlert);
+document.querySelector('.alert-container .reset-all').addEventListener('click',resetAllTimers);
+
+const alertWindow = message => {
+    document.querySelector('.alert-window h2').textContent = message;
+    document.querySelector('.alert-window').classList.remove('hide');
+}
+
+const winningAlert = () => {
+    setTimeout(() => {
+        arrayTimers.push({time: timer, date: new Date().toLocaleDateString()});
+        sortTimers();
+        alertWindow(`BRAVO !!! c\'est gagné.${arrayTimers[0].time === timer ? ' Record battu, vous avez le meilleur temps !!' : ''}`);
+        displayBestTimers();
+        localStorage.setItem('timersMemory',JSON.stringify(arrayTimers));
+        resetAll();
+    }, 500);
+}
+
 const flipCard = (e,index) => {
+    if (!timerInterval) {
+        const array = JSON.parse(localStorage.getItem('timersMemory'));
+        arrayTimers = [];
+        for (let i = 0; i < 9; i++) {
+            arrayTimers.push(array[i]);
+        }
+        timerDisplay();
+    }
     const flippedCards = Array.from(cardDivArray).filter(el => el.className.includes('flip') && !el.className.includes('same'));
     if (flippedCards.length < 2) {
         cardDivArray[index].classList.add('flip');
         flippedCards.push(cardDivArray[index]);
         if (flippedCards.length === 2) {
             totalShots++;
-            document.querySelector('p').textContent = `Nombre de coups : ${totalShots}`;
+            document.querySelector('main p').textContent = `Nombre de coups : ${totalShots}`;
             if (flippedCards[0].childNodes[1].childNodes[0].src === flippedCards[1].childNodes[1].childNodes[0].src) {
                 flippedCards[0].classList.add('same');
                 flippedCards[1].classList.add('same');
@@ -34,15 +104,19 @@ const flipCard = (e,index) => {
 }
 
 const resetAll = () => {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timer = 0;
+    document.querySelector('.chrono-container p').textContent = '0:00';
     totalShots = 0;
-    document.querySelector('p').textContent = `Nombre de coups : ${totalShots}`;
+    document.querySelector('main p').textContent = `Nombre de coups : ${totalShots}`;
     Array.from(cardDivArray).map(e => e.className = 'card');
     setTimeout(() => {
         randomizeImages();
     }, 1000);
 }
 
-document.querySelector('button').addEventListener('click',resetAll);
+document.querySelector('.reset-button').addEventListener('click',resetAll);
 
 const displayImages = array => {
     Array.from(document.querySelectorAll('.front img')).map((e,index) => {

@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 1.5vw;
 }
 
 body {
@@ -11,6 +12,91 @@ body {
   font-family: lato, Helvetica, sans-serif;
   background: linear-gradient(to right, #d17608, #ec3503);
   /* padding: clamp(20px, 5vw, 50px) 20px 10px; */
+}
+
+.chrono-container {
+  position: fixed;
+  left: 1em;
+  top: .5em;
+  border: solid .1em;
+  padding: .3em .6em;
+  border-radius: .5em;
+}
+
+.chrono-container p {
+  font-size: 1.5em;
+}
+
+/* .best-timers {
+  
+} */
+
+.alert-window {
+  z-index: 99;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255,255,255,.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-container {
+  position: relative;
+  background-color: rgb(0, 98, 0);
+  color: white;
+  text-shadow: .1em .1em .1em black;
+  padding: 4em;
+  border-radius: 1em;
+  border: solid;
+  box-shadow: 0 0 .7em black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-container h2 {
+  font-size: 1.5em;
+}
+.alert-container h4 {
+  margin: 1em 0;
+}
+
+.alert-container .close {
+  position: absolute;
+  top: -.7em;
+  right: -.5em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  color: white;
+  background-color: rgb(221, 0, 0);
+  border: none;
+}
+
+.alert-container .reset-all {
+  position: absolute;
+  bottom: .5em;
+  left: .5em;
+  padding: .2em .5em;
+  border-radius: .5em;
+}
+
+.best-timers .timer-classment {
+  position: relative;
+}
+
+.present-timer {
+  position: absolute;
+  left: -1.5em;
 }
 
 main {
@@ -32,7 +118,7 @@ span {
   font-weight: bold;
 }
 
-h2 {
+main h2 {
   font-weight: normal;
   margin: .5em 0;
 }
@@ -86,7 +172,7 @@ img {
   transform: rotateY(180deg);
 }
 
-button {
+.reset-button {
   position: absolute;
   top: 1em;
   right: 1em;
@@ -96,7 +182,11 @@ button {
   box-shadow: .1em .1em .2em rgb(106, 106, 106);
 }
 
-button h3 {
+.reset-button h3 {
   font-weight: normal;
   font-size: 1.4em;
+}
+
+.hide {
+  display: none;
 }

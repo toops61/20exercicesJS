@@ -11,13 +11,26 @@
     <script src="app.js" defer></script>
   </head>
   <body>
+    <div class="alert-window hide">
+      <div class="alert-container">
+        <h2></h2>
+        <h4>Meileurs temps</h4>
+        <div class="best-timers">
+        </div>
+        <button class="close">X</button>
+        <button class="reset-all">reset all scores</button>
+      </div>
+    </div>
     <main>
       <h1>Jeu des <span>cartes mémoires</span></h1>
       <h2>Tentez de gagner avec le moins d'essais possibles.</h2>
       <p>Nombre de coups : 0</p>
       <div class="cards-container">
       </div>
-      <button><h3>reset</h3></button>
+      <button class="reset-button"><h3>reset</h3></button>
+      <div class="chrono-container">
+        <p>0:00</p>
+      </div>
     </main>
   </body>
 </html>
