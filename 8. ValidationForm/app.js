@@ -27,9 +27,9 @@ const passwordLevel = number => {
 }
 
 const rejectPseudo = e => {
-    const regExpPseudo = new RegExp('[=;,`()§≠…∞ø«¡¶{}“º%¬®†°‡∂ﬁƒ¬‹≈©◊*#—<>≤≥]');
+    const regExpPseudo = new RegExp(/^\w{3,50}$/);
     const value = e.target.value;
-    if (!regExpPseudo.test(value) && value.length > 2) {
+    if (regExpPseudo.test(value)) {
         validFunc(0);
     } else {
         invalidFunc(0);
@@ -37,9 +37,9 @@ const rejectPseudo = e => {
 }
 
 const rejectEmail = e => {
-    const regExpEmail = new RegExp('([/=;,`:éàèîôû$&"()§!≠…∞€ø«¡¶{}“º%µ¬®†°π‡∂ﬁƒ¬‹≈©◊£*#ë—<>≤≥])');
+    const regExpEmail = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})$/);
     const value = e.target.value;
-    if (!regExpEmail.test(value) && value.includes('@') && value.includes('.')) {
+    if (regExpEmail.test(value)) {
         validFunc(1);
     } else {
         invalidFunc(1);
@@ -47,7 +47,7 @@ const rejectEmail = e => {
 }
 
 const rejectPassword = e => {
-    const regExpPassword = new RegExp('^(?=.*[0-9])(?=.*[a-zÞ-öø-ÿ])(?=.*[A-ZÀ-ÖØ-Ý])(?=.*[^0-9a-zÞ-öø-ÿA-ZÀ-ÖØ-Ý ]).{6,60}$');
+    const regExpPassword = new RegExp(/^(?=.*[0-9])(?=.*[a-zÞ-öø-ÿ])(?=.*[A-ZÀ-ÖØ-Ý])(?=.*[^0-9a-zÞ-öø-ÿA-ZÀ-ÖØ-Ý ]).{6,60}$/);
     const value = e.target.value;
     if (regExpPassword.test(value)) {
         validFunc(2);
