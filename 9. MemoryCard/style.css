@@ -10,5 +10,93 @@ body {
   min-height: 100vh;
   font-family: lato, Helvetica, sans-serif;
   background: linear-gradient(to right, #d17608, #ec3503);
-  padding: clamp(20px, 5vw, 50px) 20px 10px;
+  /* padding: clamp(20px, 5vw, 50px) 20px 10px; */
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+h1 {
+  font-weight: 300;
+  margin-top: 1em;
+}
+
+span {
+  font-weight: bold;
+}
+
+h2 {
+  font-weight: normal;
+  margin: .5em 0;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 70%;
+  margin-top: 1em;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  width: 7em;
+  height: 7em;
+  margin: .2em;
+  position: relative;
+  transition: 400ms;
+  background-color: transparent;
+  perspective: 30em;
+  transform-style: preserve-3d;
+  box-shadow: .1em .1em .2em rgb(106, 106, 106);
+}
+
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+.back,.front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+.front {
+  transform: rotateY(180deg);
+}
+
+button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  padding: .5em 1em;
+  border: none;
+  border-radius: .9em;
+  box-shadow: .1em .1em .2em rgb(106, 106, 106);
+}
+
+button h3 {
+  font-weight: normal;
+  font-size: 1.4em;
 }
