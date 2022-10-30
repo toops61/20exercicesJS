@@ -74,7 +74,17 @@ const randomColor = () => {
     document.querySelector('main').style.background = `linear-gradient(${objectColor.orientation}deg,${objectColor.color_one}, ${objectColor.color_two})`;
 }
 
-const logColor = () => console.log(`linear-gradient(${objectColor.orientation}deg,${objectColor.color_one}, ${objectColor.color_two})`);
+const openAlert = () => {
+    document.querySelector('.alert-window').classList.remove('hide');
+    setTimeout(() => {
+        document.querySelector('.alert-window').classList.add('hide');
+    }, 2000);
+}
+
+const copyColors = () => {
+    const text = `linear-gradient(${objectColor.orientation}deg,${objectColor.color_one}, ${objectColor.color_two})`;
+    navigator.clipboard.writeText(text).then(() => openAlert(),error => console.log(error));
+} 
 
 document.querySelectorAll('button')[1].addEventListener('click',randomColor);
-document.querySelectorAll('button')[0].addEventListener('click',logColor);
+document.querySelectorAll('button')[0].addEventListener('click',copyColors);

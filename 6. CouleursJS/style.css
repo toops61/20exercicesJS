@@ -25,6 +25,39 @@ main {
   background: linear-gradient(180deg,#fff, #fff);
 }
 
+.alert-window {
+  z-index: 99;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255,255,255,.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-container {
+  position: relative;
+  background-color: rgb(0, 98, 0);
+  color: white;
+  text-shadow: .1em .1em .1em black;
+  padding: 4em;
+  border-radius: 1em;
+  border: solid;
+  box-shadow: 0 0 .7em black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-container h2 {
+  font-size: 1.5em;
+}
+
 .color-label {
   color: white;
   border-radius: .5em;
@@ -36,6 +69,7 @@ main {
   border: .1em solid;
   margin: .5em 0;
   background-color: #000;
+  cursor: pointer;
 }
 .input-color {
   display: none;
@@ -44,7 +78,6 @@ main {
 .color-container {
   position: relative;
 }
-
 
 .label-orientation {
   display: flex;
@@ -67,6 +100,7 @@ label h2 {
 
 #orientation {
   width: 15em;
+  cursor: pointer;
 }
 
 .range-container {
@@ -80,8 +114,13 @@ button {
   border-radius: .3em;
   box-shadow: .1em .1em .2em rgb(98, 98, 98);
   margin: 0 .5em;
+  cursor: pointer;
 }
 
 button p {
   font-size: .7em;
+}
+
+.hide {
+  display: none;
 }
