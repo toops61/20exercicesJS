@@ -130,9 +130,12 @@ const displayImages = array => {
 const buildCards = array => {
     document.querySelector('.cards-container').replaceChildren();
     array.map(e => {
+        const subContainer = document.createElement('div');
+        subContainer.className = 'sub-container';
+        document.querySelector('.cards-container').append(subContainer);
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
-        document.querySelector('.cards-container').append(cardDiv);
+        subContainer.append(cardDiv);
         const backDiv = document.createElement('div');
         backDiv.className = 'back';
         backDiv.innerHTML = `<img src="./ressources/question.svg" alt="question">`
