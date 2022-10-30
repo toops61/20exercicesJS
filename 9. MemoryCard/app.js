@@ -47,6 +47,8 @@ const resetAllTimers = () => {
     if (window.confirm('Voulez-vous vraiment effacer tous les scores ?')) {
         localStorage.setItem('timersMemory',JSON.stringify([]));
         arrayTimers = [];
+        closeAlert();
+        resetAll();
     }
 }
 
@@ -76,14 +78,15 @@ const winningAlert = () => {
 const flipCard = (e,index) => {
     if (!timerInterval) {
         const array = JSON.parse(localStorage.getItem('timersMemory'));
+        const max = array.length >= 9 ? 9 : array.length;
         arrayTimers = [];
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < max; i++) {
             arrayTimers.push(array[i]);
         }
         timerDisplay();
     }
     const flippedCards = Array.from(cardDivArray).filter(el => el.className.includes('flip') && !el.className.includes('same'));
-    if (flippedCards.length < 2) {
+    if (flippedCards.length < 2 && !cardDivArray[index].className.includes('flip')) {
         cardDivArray[index].classList.add('flip');
         flippedCards.push(cardDivArray[index]);
         if (flippedCards.length === 2) {
