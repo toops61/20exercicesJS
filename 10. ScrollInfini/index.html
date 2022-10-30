@@ -8,12 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
     />
+    <script src="env.js" defer></script>
+    <script src="app.js" defer></script>
   </head>
   <body>
-
-    <script src="app.js"></script>
+    <main>
+      <h1>Clone Unsplash</h1>
+      <div class="search-bar">
+        <label for="search">
+          <p>Votre recherche</p>
+          <button class="search-button"></button>
+        </label>
+        <input type="text" name="search" id="search">
+      </div>
+      <section class="photos-container">
+      </section>
+    </main>
+    <div class="arrow hide"></div>
   </body>
 </html>

@@ -1,4 +1,5 @@
 node_modules
 importMeteoKey.js
+env.js
 .DS_store
 DNU
