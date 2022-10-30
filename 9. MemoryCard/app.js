@@ -77,7 +77,7 @@ const winningAlert = () => {
 
 const flipCard = (e,index) => {
     if (!timerInterval) {
-        const array = JSON.parse(localStorage.getItem('timersMemory'));
+        const array = localStorage.timersMemory ? JSON.parse(localStorage.getItem('timersMemory')) : [];
         const max = array.length >= 9 ? 9 : array.length;
         arrayTimers = [];
         for (let i = 0; i < max; i++) {
