@@ -5,8 +5,9 @@ let target = '';
 
 const searchQuery = () => {
     localStorage.setItem('arrayPhotos',JSON.stringify([]));
+    document.querySelector('.photos-container').replaceChildren();
     query = document.querySelector('input').value;
-    callApiPhotos(query);
+    query ? callApiPhotos(query) : displayMessage('votre recherche est vide...');
 }
 
 document.querySelector('button').addEventListener('click',searchQuery);
@@ -56,18 +57,29 @@ const buildCards = () => {
     })
 }
 
+displayMessage = text => {
+    const textDiv = document.querySelector('.error-message');
+    textDiv.textContent = text;
+    textDiv.classList.remove('hide-message');
+    setTimeout(() => {
+        textDiv.classList.add('hide-message');
+    }, 2000);
+}
+
 const callApiPhotos = query => {
     fetch(`https://api.unsplash.com/search/photos?query=${query}&client_id=${access}&page=${page}&per_page=30`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         const array = localStorage.arrayPhotos ? JSON.parse(localStorage.getItem('arrayPhotos')) : [];
         data.results.map(e => array.push(e));
         localStorage.setItem('arrayPhotos',JSON.stringify(array));
         arrayPhotos = [...data.results];
-        buildCards();
+        arrayPhotos.length > 0 ? buildCards() : displayMessage('Aucun résultat pour cette recherche, essayez autre chose.');
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.log(error);
+        displayMessage('Il y a eu une erreur, réessayez.');
+    });
 }
 
 //arrow page top
