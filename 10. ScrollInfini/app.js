@@ -3,14 +3,15 @@ let page = 1;
 let query = '';
 let target = '';
 
-const searchQuery = () => {
+const searchQuery = e => {
+    e.preventDefault();
     localStorage.setItem('arrayPhotos',JSON.stringify([]));
     document.querySelector('.photos-container').replaceChildren();
     query = document.querySelector('input').value;
     query ? callApiPhotos(query) : displayMessage('votre recherche est vide...');
 }
 
-document.querySelector('button').addEventListener('click',searchQuery);
+document.querySelector('button').addEventListener('click',e => searchQuery(e));
     
 /* const buildSquares = () => {
     const randomFunc = max => Math.floor(Math.random() * max);
