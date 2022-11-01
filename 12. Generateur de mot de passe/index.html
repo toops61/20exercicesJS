@@ -8,13 +8,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
     />
+    <script src="app.js" defer></script>
   </head>
   <body>
-   
+   <main>
+    <h1>Votre mot de passe</h1>
+    <div class="result">
+      <p></p>
+      <div class="copy-icon"></div>
+    </div>
+    <form>
+      <label for="length"><p>Taille du mot de passe : <span>4</span></p></label>
+      <input type="range" name="length" id="length" min="4" max="30" value="4">
+      <div class="input-container">
+        <input type="checkbox" name="lowercase" id="lowercase">
+        <label for="lowercase">Contient des caractères minuscules</label>
+      </div>
+      <div class="input-container">
+        <input type="checkbox" name="uppercase" id="uppercase">
+        <label for="uppercase">Contient des caractères majuscules</label>
+      </div>
+      <div class="input-container">
+        <input type="checkbox" name="integers" id="integers">
+        <label for="integers">Contient des nombres</label>
+      </div>
+      <div class="input-container">
+        <input type="checkbox" name="specials" id="specials">
+        <label for="specials">Contient des caractères spéciaux</label>
+      </div>
+      <button class="button-generate">Générer</button>
+    </form>
+   </main>
 
-    <script src="app.js"></script>
   </body>
 </html>

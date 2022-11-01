@@ -1,4 +1,22 @@
-*,
+@font-face {
+  font-family: 'Font Awesome 5';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-solid-900.eot");
+  src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+@font-face {
+    font-family: 'Font Awesome 5 empty';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("../fonts/fa-regular-400.eot");
+    src: url("../fonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-regular-400.woff2") format("woff2"), url("../fonts/fa-regular-400.woff") format("woff"), url("../fonts/fa-regular-400.ttf") format("truetype"), url("../fonts/fa-regular-400.svg#fontawesome") format("svg");
+  }
+  
+  *,
 ::before,
 ::after {
   box-sizing: border-box;
@@ -11,4 +29,88 @@ body {
   font-family: Open sans, Helvetica, sans-serif;
   background: #111;
   padding: clamp(20px, 5vw, 50px) 10px 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+h1 {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.result {
+  height: 3em;
+  display: flex;
+  align-items: center;
+}
+
+.result p {
+  width: 92%;
+  height: 2em;
+  border-bottom: solid .15em;
+  margin-right: .5em;
+}
+
+.copy-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 1.8em;
+  height: 2em;
+  border-radius: .3em;
+  position: relative;
+}
+
+.copy-icon::before {
+  content: '';
+  border: solid .1em black;
+  width: 0.5em;
+  height: 0.7em;
+  border-radius: .1em;
+  background-color: #fff;
+  z-index: 10;
+}
+.copy-icon::after {
+  content: '';
+  border: solid .1em black;
+  width: 0.5em;
+  height: 0.7em;
+  border-radius: .1em;
+  position: absolute;
+  transform: translate(.15em,-.15em);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+#length {
+  height: .25em;
+  margin: .5em 0;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container label {
+  margin: .2em 1em;
+}
+
+.button-generate {
+  margin-top: 1.5em;
+  padding: .5em 2em;
+  width: fit-content;
+  align-self: center;
 }

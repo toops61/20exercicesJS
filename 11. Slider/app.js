@@ -69,17 +69,19 @@ const fillImages = array => {
     }
 }
 
-const getImages = () => {
-    fetch('https://api.thecatapi.com/v1/images/search?limit=3')
-    .then(response => response.json())
-    .then(data => {
+async function getImages() {
+    try {
+        const response = await fetch('https://api.thecatapi.com/v1/images/search?limit=3');
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP : ${response.status}`);
+        };
+        const data = await response.json();
         imagesArray = [...data];
-        topSection.children.length === 0 ? constructImagesContainers() : fillImages(imagesArray);
-    })
-    .catch(error => {
+        topSection.children.length === 0 ? constructImagesContainers() : fillImages(imagesArray); 
+    } catch (error) {
         console.log(error);
         displayAlert('Nous n\'avons pas pu récupérer les photos, réessayez.');
-    });
+    }
 }
 
 getImages();
