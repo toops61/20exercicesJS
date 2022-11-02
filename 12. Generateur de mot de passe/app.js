@@ -7,7 +7,10 @@ const passwordObject = {
 }
 
 const copyAlert = () => {
-    console.log('copié');
+    document.querySelector('.clipboard').classList.remove('hide');
+    setTimeout(() => {
+        document.querySelector('.clipboard').classList.add('hide');
+    }, 2000);
 }
 
 const alertWindow = text => {
@@ -19,8 +22,10 @@ const alertWindow = text => {
 }
 
 const copyPassword = () => {
-    const text = document.querySelector('.result p').textContent;
-    navigator.clipboard.writeText(text).then(() => copyAlert(),error => console.log(error));
+    if (document.querySelector('.result p').textContent) {
+        const text = document.querySelector('.result p').textContent;
+        navigator.clipboard.writeText(text).then(() => copyAlert(),error => console.log(error));
+    }
 }
 
 document.querySelector('.copy-icon').addEventListener('click',copyPassword);

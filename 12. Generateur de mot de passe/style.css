@@ -78,6 +78,7 @@ h1 {
   height: 3em;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .result p {
@@ -115,6 +116,27 @@ h1 {
   border-radius: .1em;
   position: absolute;
   transform: translate(.15em,-.15em);
+}
+
+.clipboard {
+  z-index: 20;
+  position: absolute;
+  color: black;
+  background-color: rgb(210, 210, 210);
+  right: -7em;
+  top: -1.5em;
+  padding: .2em .5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: .2em;
+
+}
+
+.clipboard p {
+  font-size: .6em;
+  white-space: nowrap;
+  border-bottom: none;
 }
 
 form {
