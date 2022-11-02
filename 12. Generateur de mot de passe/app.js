@@ -60,10 +60,18 @@ const generateRandomNumbers = lettersNumbersString => {
     return codeArray;
 }
 
-const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-const uppercaseLetters = lowercaseLetters.toUpperCase();
-const allIntegers = '0123456789';
-const specialsCaracters = '#@&"\'(§!)-$€*£?.:=+/=<>';
+const getCharacters = (first,last) => {
+    let string ='';
+    for (let i = first; i <= last; i++) {
+        string += (String.fromCharCode(i))
+    }
+    return string;
+}
+
+const lowercaseLetters = getCharacters(97,122);
+const uppercaseLetters = getCharacters(65,90);
+const allIntegers = getCharacters(48,57);
+const specialsCaracters = getCharacters(33,47)+getCharacters(58,64)+getCharacters(91,96)+getCharacters(123,126);
 
 const concatenateCaracters = (array,string) => {
     let password = '';
