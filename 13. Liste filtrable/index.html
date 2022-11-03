@@ -12,10 +12,66 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    
-
-    <script src="script.js"></script>
+    <main>
+      <section class="nav-section">
+        <div class="title">
+          <div class="logo">
+            <img src="./images/logo.svg" alt="logo-users">
+          </div>
+          <h1>Users</h1>
+        </div>
+        <nav class="users-menu">
+          <ul>
+            <li>
+              <div class="logo">
+                <img src="./images/dashboard.svg" alt="logo-dashboard">
+              </div>
+              <h3>Dashboard</h3>
+            </li>
+            <li>
+              <div class="logo">
+                <img src="./images/speech-bubble.svg" alt="logo-messenger">
+              </div>
+              <h3>Messenger</h3>
+            </li>
+            <li>
+              <div class="logo">
+                <img src="./images/server.svg" alt="logo-database">
+              </div>
+              <h3>Database</h3>
+            </li>
+            <li>
+              <div class="logo">
+                <img src="./images/calendar.svg" alt="logo-calendar">
+              </div>
+              <h3>Calendar</h3>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section class="users-section">
+        <div class="search-bar">
+          <div class="search-bar__logo">
+            <img src="./images/search.svg" alt="loop">
+          </div>
+          <input type="text" placeholder="recherchez un utilisateur">
+        </div>
+        <h2>Résultats</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>
