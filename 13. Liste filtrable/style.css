@@ -24,16 +24,12 @@ main {
 }
 
 .nav-section {
-  width: 10em;
+  flex: 1;
+  max-width: 10em;
   border-right: solid .1em;
-  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 1em;
-}
-
-.users-menu{
-
 }
 
 li {
@@ -154,13 +150,61 @@ th,td {
   background-color: rgb(230, 245, 238);
 }
 
-.hide {
-  display: none;
-}
-
-
 .photo-profil:hover + .bigger-picture {
   opacity: 1;
   transform: translateX(-7em);
   box-shadow: 1em 1em .4em gray;
+}
+
+@media (max-width: 750px) {
+  main {
+    flex-direction: column;
+  }
+  .nav-section {
+    max-width: none;
+    border: none;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+  thead {
+    display: none;
+  }
+
+  .search-bar input {
+    min-width: 10em;
+  }
+
+  tbody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .user-row {
+    width: 12em;
+    height: 7em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em 0;
+    margin: .4em;
+    box-shadow: 0em .2em .2em gray;
+  }
+  td {
+    height: fit-content;
+    flex: none;
+  }
+  .photo-profil {
+    width: 2em;
+    height: 2em;
+  }
+}
+
+.hide {
+  display: none;
 }

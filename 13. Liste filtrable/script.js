@@ -11,6 +11,8 @@ async function getUsers() {
     }
 }
 
+getUsers();
+
 const buildLine = (user,index) => {
     const rowDiv = document.createElement('tr');
     rowDiv.className = (index%2 === 0) ? 'user-row green' : 'user-row';
