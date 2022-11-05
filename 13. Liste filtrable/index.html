@@ -53,11 +53,44 @@
         </nav>
       </section>
       <section class="users-section">
-        <div class="search-bar">
-          <div class="search-bar__logo">
-            <img src="./images/search.svg" alt="loop">
+        <div class="search-section">
+          <div class="search-bar">
+            <div class="search-bar__logo">
+              <img src="./images/search.svg" alt="loop">
+            </div>
+            <input type="text" placeholder="recherchez un utilisateur">
           </div>
-          <input type="text" placeholder="recherchez un utilisateur">
+          <div class="woman-man">
+            <div>
+              <input type="radio" name="man-woman" id="woman" value="woman">
+              <label for="woman">
+                femme
+              </label>
+            </div>
+            <div>
+              <input type="radio" name="man-woman" id="man" value="man">
+              <label for="man">
+                homme
+              </label>
+            </div> 
+          </div>
+          <div class="search-category">
+            <h3>recherchez par :</h3>
+            <div class="radios-box">
+              <div>
+                <input type="radio" name="category" id="name-category" value="name-category" checked>
+                <label for="name-category">
+                  nom / prenom
+                </label>
+              </div>
+              <div>
+                <input type="radio" name="category" id="email-category" value="email-category">
+                <label for="email-category">
+                  email
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         <h2>Résultats</h2>
         <table>

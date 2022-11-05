@@ -1,4 +1,6 @@
-async function getUsers() {
+let users = [];
+
+const getUsers = async () => {
     try {
         const result = await fetch('https://randomuser.me/api/?nat=fr&results=100');
         if (!result.ok) {
@@ -60,23 +62,42 @@ const buildUserLines = array => {
     array.sort((a,b) => {
         return (a.name.last < b.name.last) ? -1 : 1;
     })
+    users = [...array];
     array.map((user,index) => {
         buildLine(user,index);
     })
 }
 
+
+const manWomanCheck = e => {
+    const usersArray = Array.from(document.querySelectorAll('.user-row'));
+    const gender = e.target.id === "woman" ? "female" : "male";
+    usersArray.map((el,index) => {
+        users[index].gender === gender ? el.classList.remove('woman-man-hide') : el.classList.add('woman-man-hide');
+    })
+}
+
+document.querySelector('#man').addEventListener('input',e => manWomanCheck(e));
+document.querySelector('#woman').addEventListener('input',e => manWomanCheck(e));
+
 const filterSearch = e => {
     const usersArray = Array.from(document.querySelectorAll('.user-row'));
+    const category = Array.from(document.querySelectorAll('.search-category input')).find(e => e.checked).id;
     if (usersArray.length) {
         const wordsArray = e.target.value.split(' ');
         const first = wordsArray.join('').toLowerCase();
         const reverse = wordsArray.reverse().join('').toLowerCase();
-        usersArray.map(el => {
-            let name = el.firstChild.children[2].textContent;
-            name = name.split(' ').join('').toLowerCase();
+        usersArray.map((el,index) => {
+            let name;
+            if (category === 'name-category') {
+                name = el.firstChild.children[2].textContent;
+                name = name.split(' ').join('').toLowerCase();
+            } else if (category === 'email-category') {
+                name = el.childNodes[1].textContent.toLowerCase();
+            }
             name.includes(first) || name.includes(reverse) ? el.classList.remove('hide') : el.classList.add('hide');
         })
     }
 }
 
-document.querySelector('input').addEventListener('input',e => filterSearch(e));
+document.querySelector('.search-bar input').addEventListener('input',e => filterSearch(e));
