@@ -2,6 +2,7 @@ let users = [];
 let usersArray;
 let searchInput = '';
 
+//fetch call to API
 const getUsers = async () => {
     try {
         const result = await fetch('https://randomuser.me/api/?nat=fr&results=100');
@@ -26,6 +27,7 @@ const greenLines = () => {
     document.querySelector('.total-users span').textContent = arrayVisibles.length;
 }
 
+//construct lines from users array from API fetch call
 const buildLine = (user,index) => {
     const rowDiv = document.createElement('tr');
     rowDiv.className = (index%2 === 0) ? 'user-row green' : 'user-row';
@@ -94,42 +96,12 @@ const manWomanCheck = id => {
     greenLines();
 }
 
+//addEventListener to 
 for (let i = 0; i < 3; i++) {
     document.querySelectorAll('input[name="man-woman"]')[i].addEventListener('input',e => manWomanCheck(e.target.id));
 }
 
-const fillSearch = e => {
-    searchInput = e.target.value;
-    filterSearch();
-}
-
-//change third column users's infos
-const changeLastColumn = category => {
-    switch (category) {
-        case "city-category":
-            document.querySelectorAll('th')[2].textContent = "Ville";
-            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.city);
-            break;
-        case "state-category":
-            document.querySelectorAll('th')[2].textContent = "Département";
-            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.state);
-            break;
-        case "country-category":
-            document.querySelectorAll('th')[2].textContent = "Pays";
-            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.country);
-            break;
-        case "username-category":
-            document.querySelectorAll('th')[2].textContent = "Pseudo";
-            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].login.username);
-            break;
-        default:
-            document.querySelectorAll('th')[2].textContent = "Téléphone";
-            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].phone);
-            break;
-    }
-}
-
-//filter depending on search bar value and gender depending on category selected
+//filter depending on input and/or category selected
 const filterSearch = () => {
     const category = Array.from(document.querySelectorAll('.search-category input')).find(element => element.checked).id;
     if (usersArray.length) {
@@ -161,27 +133,23 @@ const filterSearch = () => {
             }
             name.includes(first) || name.includes(reverse) ? el.classList.remove('hide') : el.classList.add('hide');
         })
-        changeLastColumn(category);
         greenLines();
     }
 }
 
 //filll text and pictures content when order category is changed
 const orderColumn = () => {
-    const category = Array.from(document.querySelectorAll('.search-category input')).find(element => element.checked).id;
     usersArray.map((el,index) => {
         document.querySelectorAll('.photo-profil img')[index].setAttribute('src',users[index].picture.thumbnail);
         document.querySelectorAll('.bigger-picture img')[index].setAttribute('src',users[index].picture.medium);
         el.firstChild.childNodes[2].textContent = users[index].name.last + ' ' + users[index].name.first;
         el.childNodes[1].firstChild.textContent = users[index].email;
     })
-    const id = Array.from(document.querySelectorAll('input[name="man-woman"]')).find(e => e.checked).id;
-    filterSearch();
-    manWomanCheck(id);
 }
 
 //sort users array depending on order category selected
 const orderUsersArray = () => {
+    const category = Array.from(document.querySelectorAll('.search-category input')).find(element => element.checked).id;
     const thArray = Array.from(document.querySelectorAll('th'));
     thArray[0].className.includes('selected') && users.sort((a,b) => {
         return (a.name.last < b.name.last) ? -1 : 1;
@@ -189,23 +157,77 @@ const orderUsersArray = () => {
     thArray[1].className.includes('selected') && users.sort((a,b) => {
         return (a.email < b.email) ? -1 : 1;
     });
+    thArray[2].className.includes('selected') && users.sort((a,b) => {
+        switch (category) {
+            case "city-category":
+                return (a.location.city < b.location.city) ? -1 : 1;
+            case "state-category":
+                return (a.location.state < b.location.state) ? -1 : 1;
+            case "country-category":
+                return (a.location.country < b.location.country) ? -1 : 1;
+            case "username-category":
+                return (a.login.username < b.login.username) ? -1 : 1;
+            default:
+                return (a.phone < b.phone) ? -1 : 1;
+        }
+    });
     !thArray.some(e => e.className.includes('rotate')) && (users = users.reverse());
     orderColumn();
+    filterSearch();
+    const ind = Array.from(document.querySelectorAll('input[name="man-woman"]')).find(e => e.checked).id;
+    manWomanCheck(ind);
 }
 
 //add or rotate arrow on ordered column
-const orderColumnPicto = e => {
-    if (e.target.localName === 'th') {
-        Array.from(document.querySelectorAll('th')).map(el => {
-            el.classList.remove('selected');
-            e.srcElement!== el && el.classList.remove('rotate');
-        });
-        e.srcElement.classList.add('selected');
-        e.srcElement.classList.toggle('rotate');
-        orderUsersArray();
+const orderColumnPicto = id => {
+    const thArray = Array.from(document.querySelectorAll('th'));
+    thArray.map((el,index) => {
+        el.classList.remove('selected');
+        id !== index && el.classList.remove('rotate');
+    });
+    thArray[id].classList.add('selected');
+    thArray[id].classList.toggle('rotate');
+    orderUsersArray();
+}
+
+//change third column users's infos displayed
+const changeLastColumn = () => {
+    const category = Array.from(document.querySelectorAll('.search-category input')).find(element => element.checked).id;
+    switch (category) {
+        case "city-category":
+            document.querySelectorAll('th h3')[2].textContent = "Ville";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.city);
+            break;
+        case "state-category":
+            document.querySelectorAll('th h3')[2].textContent = "Département";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.state);
+            break;
+        case "country-category":
+            document.querySelectorAll('th h3')[2].textContent = "Pays";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.country);
+            break;
+        case "username-category":
+            document.querySelectorAll('th h3')[2].textContent = "Pseudo";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].login.username);
+            break;
+        default:
+            document.querySelectorAll('th h3')[2].textContent = "Téléphone";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].phone);
+            break;
     }
 }
 
+//fill searchInput from search bar input value then filter
+const fillSearch = e => {
+    searchInput = e.target.value;
+    filterSearch();
+}
+
+const categoryChangedFunction = () => {
+    filterSearch();
+    changeLastColumn();
+}
+
 document.querySelector('.search-bar input').addEventListener('input',e => fillSearch(e));
-Array.from(document.querySelectorAll('.search-category input')).map(e => e.addEventListener('input',filterSearch));
-Array.from(document.querySelectorAll('th')).map(el => el.addEventListener('click',e => orderColumnPicto(e)));
+Array.from(document.querySelectorAll('.search-category input')).map(e => e.addEventListener('input',categoryChangedFunction));
+Array.from(document.querySelectorAll('th')).map((el,index) => el.addEventListener('click',e => orderColumnPicto(index)));

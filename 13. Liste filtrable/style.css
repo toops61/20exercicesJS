@@ -177,6 +177,10 @@ th,td {
   align-items: center;
 }
 
+th {
+  cursor: pointer;
+}
+
 .order {
   display: none;
   justify-content: center;
