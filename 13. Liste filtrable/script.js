@@ -1,4 +1,6 @@
 let users = [];
+let usersArray;
+let searchInput = '';
 
 const getUsers = async () => {
     try {
@@ -14,6 +16,15 @@ const getUsers = async () => {
 }
 
 getUsers();
+
+//dispatch green lines on peer
+const greenLines = () => {
+    const arrayVisibles = usersArray.filter(e => !e.className.includes('hide'));
+    arrayVisibles.map((e,index) => {
+        index%2 === 0 ? e.classList.add('green') : e.classList.remove('green');
+    })
+    document.querySelector('.total-users span').textContent = arrayVisibles.length;
+}
 
 const buildLine = (user,index) => {
     const rowDiv = document.createElement('tr');
@@ -66,38 +77,135 @@ const buildUserLines = array => {
     array.map((user,index) => {
         buildLine(user,index);
     })
+    usersArray = Array.from(document.querySelectorAll('.user-row'));
+    document.querySelector('.total-users span').textContent = array.length;
 }
 
-
-const manWomanCheck = e => {
-    const usersArray = Array.from(document.querySelectorAll('.user-row'));
-    const gender = e.target.id === "woman" ? "female" : "male";
-    usersArray.map((el,index) => {
-        users[index].gender === gender ? el.classList.remove('woman-man-hide') : el.classList.add('woman-man-hide');
-    })
+//hide rows depending on gender
+const manWomanCheck = id => {
+    if (id === "all-gender") {
+        usersArray.forEach(el => el.classList.remove('woman-man-hide'));
+    } else {
+        const gender = id === "woman" ? "female" : "male";
+        usersArray.map((el,index) => {
+            users[index].gender === gender ? el.classList.remove('woman-man-hide') : el.classList.add('woman-man-hide');
+        })
+    }
+    greenLines();
 }
 
-document.querySelector('#man').addEventListener('input',e => manWomanCheck(e));
-document.querySelector('#woman').addEventListener('input',e => manWomanCheck(e));
+for (let i = 0; i < 3; i++) {
+    document.querySelectorAll('input[name="man-woman"]')[i].addEventListener('input',e => manWomanCheck(e.target.id));
+}
 
-const filterSearch = e => {
-    const usersArray = Array.from(document.querySelectorAll('.user-row'));
-    const category = Array.from(document.querySelectorAll('.search-category input')).find(e => e.checked).id;
+const fillSearch = e => {
+    searchInput = e.target.value;
+    filterSearch();
+}
+
+//change third column users's infos
+const changeLastColumn = category => {
+    switch (category) {
+        case "city-category":
+            document.querySelectorAll('th')[2].textContent = "Ville";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.city);
+            break;
+        case "state-category":
+            document.querySelectorAll('th')[2].textContent = "Département";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.state);
+            break;
+        case "country-category":
+            document.querySelectorAll('th')[2].textContent = "Pays";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].location.country);
+            break;
+        case "username-category":
+            document.querySelectorAll('th')[2].textContent = "Pseudo";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].login.username);
+            break;
+        default:
+            document.querySelectorAll('th')[2].textContent = "Téléphone";
+            usersArray.map((e,index) => e.childNodes[2].firstChild.textContent = users[index].phone);
+            break;
+    }
+}
+
+//filter depending on search bar value and gender depending on category selected
+const filterSearch = () => {
+    const category = Array.from(document.querySelectorAll('.search-category input')).find(element => element.checked).id;
     if (usersArray.length) {
-        const wordsArray = e.target.value.split(' ');
+        const wordsArray = searchInput.split(' ');
         const first = wordsArray.join('').toLowerCase();
         const reverse = wordsArray.reverse().join('').toLowerCase();
         usersArray.map((el,index) => {
             let name;
-            if (category === 'name-category') {
-                name = el.firstChild.children[2].textContent;
-                name = name.split(' ').join('').toLowerCase();
-            } else if (category === 'email-category') {
-                name = el.childNodes[1].textContent.toLowerCase();
+            switch (category) {
+                case 'name-category' :
+                    name = el.firstChild.children[2].textContent;
+                    name = name.split(' ').join('').toLowerCase();
+                    break;
+                case 'username-category' :
+                    name = users[index].login.username.toLowerCase();
+                    break;
+                case 'email-category' :
+                    name = el.childNodes[1].textContent.toLowerCase();
+                    break;
+                case 'city-category' :
+                    name = users[index].location.city.toLowerCase();
+                    break;
+                case 'state-category' :
+                    name = users[index].location.state.toLowerCase();
+                    break;
+                case 'country-category' :
+                    name = users[index].location.country.toLowerCase();
+                    break;
             }
             name.includes(first) || name.includes(reverse) ? el.classList.remove('hide') : el.classList.add('hide');
         })
+        changeLastColumn(category);
+        greenLines();
     }
 }
 
-document.querySelector('.search-bar input').addEventListener('input',e => filterSearch(e));
+//filll text and pictures content when order category is changed
+const orderColumn = () => {
+    const category = Array.from(document.querySelectorAll('.search-category input')).find(element => element.checked).id;
+    usersArray.map((el,index) => {
+        document.querySelectorAll('.photo-profil img')[index].setAttribute('src',users[index].picture.thumbnail);
+        document.querySelectorAll('.bigger-picture img')[index].setAttribute('src',users[index].picture.medium);
+        el.firstChild.childNodes[2].textContent = users[index].name.last + ' ' + users[index].name.first;
+        el.childNodes[1].firstChild.textContent = users[index].email;
+    })
+    const id = Array.from(document.querySelectorAll('input[name="man-woman"]')).find(e => e.checked).id;
+    filterSearch();
+    manWomanCheck(id);
+}
+
+//sort users array depending on order category selected
+const orderUsersArray = () => {
+    const thArray = Array.from(document.querySelectorAll('th'));
+    thArray[0].className.includes('selected') && users.sort((a,b) => {
+        return (a.name.last < b.name.last) ? -1 : 1;
+    });
+    thArray[1].className.includes('selected') && users.sort((a,b) => {
+        return (a.email < b.email) ? -1 : 1;
+    });
+    !thArray.some(e => e.className.includes('rotate')) && (users = users.reverse());
+    orderColumn();
+}
+
+//add or rotate arrow on ordered column
+const orderColumnPicto = e => {
+    if (e.target.localName === 'th') {
+        Array.from(document.querySelectorAll('th')).map(el => {
+            el.classList.remove('selected');
+            e.srcElement!== el && el.classList.remove('rotate');
+        });
+        e.srcElement.classList.add('selected');
+        e.srcElement.classList.toggle('rotate');
+        orderUsersArray();
+    }
+}
+
+document.querySelector('.search-bar input').addEventListener('input',e => fillSearch(e));
+Array.from(document.querySelectorAll('.search-category input')).map(e => e.addEventListener('input',filterSearch));
+Array.from(document.querySelectorAll('th')).map(el => el.addEventListener('click',e => orderColumnPicto(e)));
