@@ -145,6 +145,7 @@ const orderColumn = () => {
         el.firstChild.childNodes[2].textContent = users[index].name.last + ' ' + users[index].name.first;
         el.childNodes[1].firstChild.textContent = users[index].email;
     })
+    changeLastColumn();
 }
 
 //sort users array depending on order category selected
@@ -224,8 +225,12 @@ const fillSearch = e => {
 }
 
 const categoryChangedFunction = () => {
-    filterSearch();
-    changeLastColumn();
+    if (document.querySelectorAll('th')[2].className.includes('selected')) {
+        orderUsersArray();
+    } else {
+        filterSearch();
+        changeLastColumn();
+    }
 }
 
 document.querySelector('.search-bar input').addEventListener('input',e => fillSearch(e));
