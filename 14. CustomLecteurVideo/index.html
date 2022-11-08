@@ -10,10 +10,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="app.js" defer></script>
 </head>
 <body>
-
-
-    <script src="app.js"></script>
+    <main>
+        <h1>Lecteur <span>personnalisé</span></h1>
+        <section class="player-container">
+            <div class="video-container">
+                <video src="./ressources/video.mp4"></video>
+                <div class="controls-section">
+                    <button class="play-pause">
+                        <img src="./ressources/play.svg" alt="play-pause">
+                    </button>
+                    <button class="mute">
+                        <img src="./ressources/unmute.svg" alt="play-pause">
+                    </button>
+                    <p class="actual-time">0:00</p>
+                    <input type="range" name="scroll-time" id="scroll-time" value="0" min="0">
+                    <p class="total-time"></p>
+                    <button class="full-screen">
+                        <img src="./ressources/fullscreen.svg" alt="fullscreen">
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

@@ -4,10 +4,76 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 1.5vw;
 }
 
 body {
   font-family: Montserrat, sans-serif;
   background: #d1d1d1;
   padding-top: 50px;
+  height: 100vh;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+span {
+  font-weight: normal;
+  font-size: 1em;
+}
+
+.player-container {
+  margin-top: 2em;
+}
+
+.video-container {
+  position: relative;
+  height: fit-content;
+}
+
+.controls-section {
+  opacity: 0;
+  position: absolute;
+  background-color: black;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  color: white;
+  width: 100%;
+  bottom: 0;
+  transition: .5s;
+}
+
+.controls-section:hover {
+  opacity: 1;
+}
+
+button {
+  margin: 0 1em;
+  width: 1em;
+  height: 1em;
+  border: none;
+  background-color: inherit;
+}
+
+button:last-child {
+  position: absolute;
+  right: 0;
+}
+
+p {
+  margin: 0 .5em;
+}
+
+input {
+  width: 40%;
 }
