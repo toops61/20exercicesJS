@@ -22,10 +22,13 @@
                     <button class="play-pause">
                         <img src="./ressources/play.svg" alt="play-pause">
                     </button>
-                    <button class="mute">
+                    <button class="volume">
+                        <input type="range" name="scroll-volume" id="scroll-volume" min="0" max="10" class="hide">
                         <img src="./ressources/unmute.svg" alt="play-pause">
                     </button>
-                    <p class="actual-time">0:00</p>
+                    <div class="time-container">
+                        <p class="actual-time">0:00</p>
+                    </div>
                     <input type="range" name="scroll-time" id="scroll-time" value="0" min="0">
                     <p class="total-time"></p>
                     <button class="full-screen">

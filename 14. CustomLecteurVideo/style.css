@@ -37,7 +37,12 @@ span {
 
 .video-container {
   position: relative;
-  height: fit-content;
+  width: 40em;
+}
+
+video {
+  object-fit: contain;
+  width: 100%;
 }
 
 .controls-section {
@@ -51,6 +56,28 @@ span {
   width: 100%;
   bottom: 0;
   transition: .5s;
+}
+
+.time-container {
+  width: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scroll-volume {
+  position: absolute;
+  transform: rotate(-90deg);
+  top: -3.3em;
+  width: 5em;
+  height: .3em;
 }
 
 .controls-section:hover {
@@ -74,6 +101,11 @@ p {
   margin: 0 .5em;
 }
 
-input {
+#scroll-time {
   width: 40%;
+  height: .3em;
+}
+
+.hide {
+  display: none;
 }

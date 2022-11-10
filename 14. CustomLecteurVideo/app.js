@@ -3,9 +3,10 @@ let timerVideo = null;
 
 const playButton = document.querySelector('.play-pause');
 
-const volume = document.querySelector('input[name="volume"]');
+const volume = document.querySelector('input[name="scroll-volume"]');
 const scrollTime = document.querySelector('input[name="scroll-time"]');
 const currentTime = document.querySelector('.actual-time');
+const fullScreen = document.querySelector('.full-screen');
 
 const formatTime = time => {
     let seconds = Math.round(time%60);
@@ -17,7 +18,7 @@ const formatTime = time => {
 const getDuration = () => {
     if (videoDom.duration > 0) {
         videoDuration = videoDom.duration;
-        videoDom.volume = .1;
+        videoDom.volume = .5;
         totalTime = formatTime(videoDuration);
         document.querySelector('.total-time').textContent = totalTime;
         secondsDuration = Math.ceil(videoDuration);
@@ -35,6 +36,7 @@ const playVideo = () => {
     timerVideo = setInterval(() => {
         beginTime++;
         currentTime.textContent = formatTime(beginTime);
+        scrollTime.value = beginTime;
     }, 1000);
 }
 
@@ -49,11 +51,48 @@ const playPauseVideo = () => {
 }
 
 playButton.addEventListener('click',playPauseVideo);
+videoDom.addEventListener('click',playPauseVideo);
 
 const cursorMove = e => {
-    //videoDom.volume = 1;
+    pauseVideo();
     videoDom.currentTime = e.target.value;
     currentTime.textContent = formatTime(e.target.value);
 }
 
+changeVolume = e => {
+    videoDom.volume = e.target.value / 10;
+    document.querySelector('.volume').childNodes[3].setAttribute('src',`./ressources/${e.target.value == 0 ? 'mute' : 'unmute'}.svg`);
+}
+
 scrollTime.addEventListener('input',e => cursorMove(e));
+volume.addEventListener('input',e => changeVolume(e));
+volume.addEventListener('mouseup',e => {
+    setTimeout(() => {
+        volume.classList.add('hide');
+    }, 500);
+});
+
+document.querySelector('.volume').childNodes[3].addEventListener('click',e => volume.classList.remove('hide'));
+
+function fullScreenFunc() {
+    if (!document.fullscreenElement) {
+      document.querySelector('.video-container').requestFullscreen()
+      .then(() => {
+
+      })
+      .catch((err) => {
+        alert(`Il y a eu un problème sur le mode plein écran: ${err.message} (${err.name})`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+}
+
+fullScreen.addEventListener('click',fullScreenFunc);
+
+document.addEventListener('keydown',e => {
+    /* if (e.code === "Escape" && document.fullscreenElement) {
+        document.exitFullscreen();
+    } */
+    e.code === 'Space' && playPauseVideo();
+});
