@@ -91,8 +91,5 @@ function fullScreenFunc() {
 fullScreen.addEventListener('click',fullScreenFunc);
 
 document.addEventListener('keydown',e => {
-    /* if (e.code === "Escape" && document.fullscreenElement) {
-        document.exitFullscreen();
-    } */
     e.code === 'Space' && playPauseVideo();
 });
