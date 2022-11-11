@@ -41,7 +41,7 @@ const checkWinner = () => {
     let winner = false;
     const caseContent = id => playCase[id].firstChild.textContent;
     winArray.map(e => {
-        if (caseContent(e[0]) === caseContent(e[1]) && caseContent(e[1]) === caseContent(e[2]) && caseContent(e[0]) === caseContent(e[2]) && caseContent(e[0])) {
+        if (caseContent(e[0]) === caseContent(e[1]) && caseContent(e[1]) === caseContent(e[2]) && caseContent(e[0])) {
             winner = true;
         };
     })
