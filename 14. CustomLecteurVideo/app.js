@@ -77,9 +77,6 @@ document.querySelector('.volume').childNodes[3].addEventListener('click',e => vo
 function fullScreenFunc() {
     if (!document.fullscreenElement) {
       document.querySelector('.video-container').requestFullscreen()
-      .then(() => {
-
-      })
       .catch((err) => {
         alert(`Il y a eu un problème sur le mode plein écran: ${err.message} (${err.name})`);
       });

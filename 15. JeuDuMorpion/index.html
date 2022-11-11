@@ -12,9 +12,43 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <script src="app.js" defer></script>
   </head>
   <body>
-   
-    <script src="app.js"></script>
+   <main>
+    <button class="reset">reset</button>
+    <h1><span>le</span> Morpion</h1>
+    <form class="names">
+      <div class="input-container">
+        <label for="player1">Nom du joueur 1</label>
+        <input type="text" name="player1" id="player1" class="input-names">
+        <div class="arrow"></div>
+      </div>
+      <div class="input-container">
+        <label for="player2">Nom du joueur 2</label>
+        <input type="text" name="player2" id="player2" class="input-names">
+        <div class="arrow"></div>
+      </div>
+    </form>
+    <section class="playground">
+      <div class="line">
+        <div class="case"><p></p></div>
+        <div class="case"><p></p></div>
+        <div class="case"><p></p></div>
+      </div>
+      <div class="line">
+        <div class="case"><p></p></div>
+        <div class="case"><p></p></div>
+        <div class="case"><p></p></div>
+      </div>
+      <div class="line">
+        <div class="case"><p></p></div>
+        <div class="case"><p></p></div>
+        <div class="case"><p></p></div>
+      </div>
+    </section>
+    <p class="player-turn">Au tour de joueur1</p>
+    <h2 class="winner animate"></h2>
+   </main>
   </body>
 </html>
