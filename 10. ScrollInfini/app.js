@@ -12,22 +12,6 @@ const searchQuery = e => {
 }
 
 document.querySelector('button').addEventListener('click',e => searchQuery(e));
-    
-/* const buildSquares = () => {
-    const randomFunc = max => Math.floor(Math.random() * max);
-    document.querySelector('.photos-container');
-    for (let i = 0; i < 30; i++) {
-        const photoCard = document.createElement('div');
-        photoCard.className = 'photo-card';
-        document.querySelector('.photos-container').append(photoCard);
-        let [r,g,b] = ['r','g','b'].map(e => randomFunc(256));
-        photoCard.style.backgroundColor = `rgb(${r},${g},${b})`;
-        if (i === 20) {
-            target = photoCard;
-            observer.observe(target);
-        }
-    }
-} */
 
 const observer = new IntersectionObserver(entries => {
     entries.map(e => {
@@ -38,7 +22,6 @@ const observer = new IntersectionObserver(entries => {
             callApiPhotos(query);
         }
     })
-    
 });
 
 const buildCards = () => {
