@@ -60,17 +60,17 @@ li {
   border: 1px solid rgb(214, 214, 214);
   border-radius: 50%;
   padding: .1em;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .custom-cursor p {
-  position: absolute;
   font-weight: bold;
-  bottom: .05em;
+  font-size: 1.5em;
+  transform: translateY(-25%);
 }
 
 h1 {
@@ -91,7 +91,7 @@ h1 {
   transition: 5s;
 }
 
-.top-section button {
+.down-button {
   z-index: 50;
   cursor: pointer;
   position: absolute;
@@ -107,7 +107,7 @@ h1 {
   bottom: 1em;
 }
 
-.top-section button img {
+.down-button img {
   object-fit: contain;
 }
 
@@ -260,13 +260,16 @@ h3 {
   h3 {
     font-size: 1.8em;
   }
-  .top-section button {
+  .down-button {
     width: 3em;
     height: 3em;
     padding: .8em;
   }
   .custom-cursor {
     display: none;
+  }
+  .article-part1 .text-part {
+    text-align: center;
   }
   .scroll-section {
     width: 100%;

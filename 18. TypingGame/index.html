@@ -12,10 +12,37 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <script src="app.js" defer></script>
   </head>
   <body>
-
- 
-    <script src="app.js"></script>
+    <main>
+      <div class="alert-window hide">
+        <div class="alert-container">
+          <p class="end-game"></p>
+          <h4>Meilleurs temps</h4>
+          <div class="best-timers"></div>
+          <button class="close-button">X</button>
+        </div>
+      </div>
+      <div class="valid-button hide"></div>
+      <div class="valid-button hide"><p>X</p></div>
+      <button class="reset-button">Reset</button>
+      <section class="top">
+        <h1>Petite frappe... <span>⌨️</span></h1>
+        <p>Tapez le plus vite possible !</p>
+        <div class="counters-container">
+          <div class="counter">
+            <p class="timer">Temps 0</p>
+          </div>
+          <div class="counter">
+            <p class="score">Score : 0</p>
+          </div>
+        </div>
+      </section>
+      <section class="typing-container">
+        <textarea name="sentence" id="sentence" cols="30" rows="10"></textarea>
+        <p class="typing-sentence"></p>
+      </section>
+    </main>
   </body>
 </html>
