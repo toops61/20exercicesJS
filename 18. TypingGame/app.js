@@ -54,6 +54,7 @@ const validSentence = valid => {
     document.querySelector('.score').textContent = `Score : ${score}`;
 }
 
+//compare typed sentence with suggested one
 const compareSentences = e => {
     if (typingTimer > 0) {
         const typed = e.target.value;
@@ -64,6 +65,7 @@ const compareSentences = e => {
         } else if (typed.length > 1) {
             valid = typingSentence.includes(typed) ? true : false;
         }
+        //typed != from '' => validSentence() and colorParts()
         if (typed) {
             validSentence(valid)
         } else {
@@ -83,6 +85,7 @@ inputArea.addEventListener('input',compareSentences);
 
 const sortScores = () => typingScoresArray.sort((a,b) => b.score-a.score);
 
+//display best scores in alert window
 const displayScores = () => {
     const bestTimersDiv = document.querySelector('.best-timers');
     bestTimersDiv.replaceChildren();
@@ -93,6 +96,7 @@ const displayScores = () => {
     })
 }
 
+//add score to best scores array and sort
 const handleScores = () => {
     typingScoresArray.length > 9 && typingScoresArray.pop();
     typingScoresArray.push({score: score, date: new Date().toLocaleDateString()});
