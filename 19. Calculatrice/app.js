@@ -103,3 +103,37 @@ const h1Dom = document.querySelector('h1');
 const operationDom = document.querySelector('.operation');
 
 Array.from(touchArrayDom).map((el,index) => el.addEventListener('click',e => handleTouch(e,index)));
+
+const inputsArray = document.querySelectorAll('input');
+
+const handleColor = (e,index) => {
+    index === 0 && (document.querySelector('.calculator-body').style.backgroundColor = e.target.value);
+    if (index === 1) {
+        const arrayBackgroundTouch = Array.from(document.querySelectorAll('.touch-background'));
+        arrayBackgroundTouch.map((el,index) => {
+            index < (arrayBackgroundTouch.length-1) && (el.style.backgroundColor = e.target.value);
+        });
+        const rgb = (arrayBackgroundTouch[0].style.backgroundColor).split('(')[1].split(')')[0];
+        const [r,g,b] = rgb.split(',');
+        const yiq = (r*299 + g*587 + b*144) / 1000;
+        arrayBackgroundTouch.map((e,index) => index < (arrayBackgroundTouch.length-1) && (e.style.color = yiq > 128 ? 'black' : 'white'));
+    } 
+    if (index === 2) {
+        const equal = document.querySelectorAll('.touch-background.double')[1];
+        equal.style.backgroundColor = e.target.value;
+        const rgb = (equal.style.backgroundColor).split('(')[1].split(')')[0];
+        const [r,g,b] = rgb.split(',');
+        const yiq = (r*299 + g*587 + b*144) / 1000;
+        equal.style.color = yiq > 128 ? 'black' : 'white';
+    }
+    const color1 = document.querySelectorAll('.touch-background')[0].style.backgroundColor;
+    const color2 = document.querySelectorAll('.touch-background.double')[1].style.backgroundColor;
+    const textInputColor = document.querySelectorAll('.touch-background')[0].style.color;
+    
+    if (color1 && color2) {
+        Array.from(document.querySelectorAll('label')).map(e => e.style.color=textInputColor)
+    };
+    document.querySelector('body').style.background = `linear-gradient(to right,${color1},${color2})`;
+}
+
+Array.from(inputsArray).map((el,index) => el.addEventListener('input',e => handleColor(e,index)));
