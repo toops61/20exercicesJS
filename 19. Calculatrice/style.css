@@ -37,7 +37,7 @@ body {
 
 .calculator-screen {
   width: 12em;
-  height: 5em;
+  min-height: 5em;
   background-color: rgb(83, 83, 83);
   margin: .8em;
   border-radius: 1em;
@@ -55,11 +55,13 @@ body {
 .calculator-screen p {
   font-size: .8em;
   margin: 0 .8em .5em;
+  word-break: break-word;
 }
 
 h1 {
   font-size: 1.3em;
   margin: .3em;
+  word-break: break-word;
 }
 
 .calculator-touch {
