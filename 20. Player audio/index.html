@@ -13,6 +13,44 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-
+    <main class="player-body">
+      <div class="player-back">
+      </div>
+      <div class="volume-buttons">
+        <button class="volume"></button>
+        <button class="volume"></button>
+      </div>
+      <audio src="./ressources/music/Aurora.mp3" class="song"></audio>
+      <section class="screen-container">
+        <img src="./ressources/thumbs/Aurora.png" alt="cover">
+      </section>
+      <section class="title-container">
+        <div class="title">
+          <h1>SLUMB</h1>
+          <p>Aurora</p>
+        </div>
+        <div class="title-number"><p>3/4</p></div>
+      </section>
+      <section class="progressbar-container">
+        <div class="progress-bar">
+          <input type="range" name="progress-input" id="progress-input" min="0" max="60">
+          <div class="progress"></div>
+        </div>
+        <div class="time">
+          <p>0:00</p>
+          <p>0:00</p>
+        </div>
+      </section>
+      <section class="controls-container">
+        <div class="random"></div>
+        <button class="backward"></button>
+        <button class="play-pause">
+          <div class="play"></div>
+          <div class="pause"></div>
+        </button>
+        <button class="forward"></button>
+        <div class="repeat"></div>
+      </section>
+    </main>
   </body>
 </html>
