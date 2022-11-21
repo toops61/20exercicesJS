@@ -14,7 +14,6 @@
 
 body {
   min-height: 100vh;
-  background: #3d3f41;
   background: linear-gradient(132deg, #3d3f41 6%, #384a52 61%, #4a4c4e 95%);
   font-family: "Lato", sans-serif;
   font-size: 1.5vw;
@@ -44,7 +43,7 @@ p {
   position: absolute;
   background-color: rgb(232, 232, 232);
   width: 15em;
-  height: 26em;
+  height: 27em;
   border-radius: 1em;
   transform: translate(.7em,.7em);
 }
@@ -88,11 +87,10 @@ p {
 }
 
 .title-container {
+  position: relative;
   width: 94%;
-  height: 3em;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
 }
 
 .title h1 {
@@ -101,8 +99,21 @@ p {
 }
 
 .title p {
-  font-size: 1em;
+  font-size: .9em;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 14em;
+  text-overflow: ellipsis;
+}
 
+.title p:nth-child(3) {
+  max-width: 12em;
+  color: white;
+}
+
+.title-number {
+  position: absolute;
+  right: 0;
 }
 
 .progressbar-container {
@@ -112,6 +123,7 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 1em;
 }
 
 .progress-bar {
@@ -271,17 +283,38 @@ p {
   color: #5d5d5d;
 }
 
+.repeat p {
+  position: absolute;
+  top: .65em;
+  left: 1em;
+  font-size: .5em;
+  display: none;
+}
+
+.repeat-one p {
+  display: inline;
+  color: white;
+}
+
 .repeat::before {
   content: '\f363';
   font-family: 'Font Awesome 6 solid';
   font-weight: 100;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-style: normal;
   font-variant: normal;
   text-rendering: auto;
   line-height: 1;
 }
 
+button {
+  cursor: pointer;
+}
+
 .hide {
   display: none;
+}
+
+.selected {
+  color: white;
 }
