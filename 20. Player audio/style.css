@@ -61,11 +61,12 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  padding: .2em 0;
 }
 
 .volume {
-  height: 2em;
   width: .4em;
+  flex: 1;
   border: none;
   border-radius: .3em;
   margin: .2em 0;

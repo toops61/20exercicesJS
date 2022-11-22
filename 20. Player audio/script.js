@@ -180,6 +180,7 @@ const previousButton = () => {
 document.querySelector('.backward').addEventListener('click',previousButton);
 
 const jumpCurrent = e => {
+  console.log(e.target.value);
   songSelected.currentTime = e.target.value;
   timer = e.target.value;
   displayTimeBar();
