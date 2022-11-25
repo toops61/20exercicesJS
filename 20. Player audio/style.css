@@ -35,6 +35,16 @@ p {
   font-size: .8em;
 }
 
+.triangle-corner {
+  position: absolute;
+  border: solid;
+  border-color: transparent rgb(232, 232, 232) transparent transparent;
+  border-width: .7em;
+  transform: rotate(-35deg);
+  right: .4em;
+  top: -.4em;
+}
+
 .player-body {
   background-color: black;
   padding: 1em;
