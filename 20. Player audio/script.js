@@ -1,6 +1,8 @@
 let songsArray = [];
 let songSelectedIndex = 0;
 
+let playedSongs = [];
+
 let timer = 0;
 let timerInterval = null;
 let songDuration = 0;
@@ -10,6 +12,8 @@ let playing = false;
 const playPause = document.querySelector('.play-pause');
 const songSelected = document.querySelector('audio');
 const volumeButtons = document.querySelectorAll('.volume');
+
+const repeatDom = document.querySelector('.repeat');
 
 songSelected.volume = .5;
 
@@ -60,7 +64,9 @@ const getTags = async () => {
   return await jsmediatags.read(songSelected.src, {
     onSuccess: tag => {
       //console.log(tag);
-      tag.tags.picture ? displayCover(tag.tags) : document.querySelector('.screen-container img').setAttribute('src','');
+      const screenCover = document.querySelector('.screen-container');
+      tag.tags.picture ? displayCover(tag.tags) : screenCover.childNodes[1].setAttribute('src','');
+      tag.tags.picture ? screenCover.classList.remove('no-picture') : screenCover.classList.add('no-picture');
       displayMetadata(tag.tags);
     },
     onError: error => console.log(error)
@@ -89,7 +95,7 @@ const getDuration = () => {
   if (songSelected.duration > 0) {
       songDuration = songSelected.duration;
       document.querySelectorAll('.time p')[1].textContent = convertTime(songDuration);
-      document.querySelector('#progress-input').setAttribute('max',Math.ceil(songDuration));
+      //document.querySelector('#progress-input').setAttribute('max',Math.ceil(songDuration));
   }
 };
 //get duration of song if changes
@@ -103,37 +109,56 @@ const displayTimeBar = () => {
   document.querySelector('.progress').style.transform = `translateX(${progress}%)`;
 }
 
+const jumpCurrent = e => {
+  const duration = songDuration;
+  const clickPosition = e.target.className === 'progress-bar' ? e.offsetX : e.layerX;
+  const barLength = document.querySelector('.progress-bar').offsetWidth;
+  const x = (clickPosition * duration) / barLength;
+  songSelected.currentTime = x;
+  timer = x;
+  displayTimeBar();
+  displayTimes();
+}
+
+document.querySelector('.progress-bar').addEventListener('click',jumpCurrent);
+
 const displayTimes = () => {
   const leftTime = songDuration - songSelected.currentTime;
   document.querySelectorAll('.time p')[0].textContent = timeLeft ? `-${convertTime(leftTime)}`: convertTime(timer);
 }
 
 const randomSelectSong = () => {
-  songSelectedIndex = Math.round(Math.random()*songsArray.length);
-  loadSong();
+  timer = 0;
+  songSelectedIndex = Math.round(Math.random()*(songsArray.length-1));
+  !playedSongs.includes(songSelectedIndex) ? loadSong() : randomSelectSong();
 }
 
 const playTimer = () => {
+  clearInterval(timerInterval);
   timerInterval = setInterval(() => {
     timer++;
     displayTimeBar();
     displayTimes();
     if (songSelected.currentTime == songDuration) {
-      //clearInterval(timerInterval);
-      if (!document.querySelector('.repeat').className.includes('selected') && songSelectedIndex == (songsArray.length-1)) {
+      if (!repeatDom.className.includes('selected') && songSelectedIndex == (songsArray.length-1)) {
         pauseSong();
         playPause.classList.toggle('active');
         nextSong();
       } else {
-        !document.querySelector('.repeat').className.includes('repeat-one') ? nextSong() : (timer = 0 && songSelected.play());
+        if (!repeatDom.className.includes('repeat-one')) {
+          nextSong()
+        } else {
+          timer = 0 
+          playSong();
+        }
       }
     } 
   }, 1000);
 }
 
 const playSong = () => {
-  if (document.querySelector('.random').className.includes('selected') && timer == 0) {
-    randomSelectSong();
+  if (document.querySelector('.random').className.includes('selected') && timer == 0 && !repeatDom.className.includes('repeat-one')) {
+    playedSongs.length !== songsArray.length && randomSelectSong();
   }
   songSelected.play();
   playing = true;
@@ -154,9 +179,28 @@ const playPauseFunction = () => {
 playPause.addEventListener('click',playPauseFunction);
 
 const nextSong = () => {
-  songSelectedIndex = songSelectedIndex < (songsArray.length-1) ? songSelectedIndex+1 : 0;
-  timer = 0;
-  loadSong();
+  if (document.querySelector('.random').className.includes('selected') && !repeatDom.className.includes('repeat-one')) {
+    playedSongs.push(songSelectedIndex);
+    if (playedSongs.length !== songsArray.length) {
+      randomSelectSong();
+    } else {
+      playedSongs = [];
+      timer = 0;
+      if (!repeatDom.className.includes('selected')) {
+        songSelectedIndex = 0;
+        pauseSong();
+        loadSong();
+        playPause.classList.toggle('active');
+      } else {
+        randomSelectSong();
+      }
+    }
+  } else {
+    songSelectedIndex = songSelectedIndex < (songsArray.length-1) ? songSelectedIndex+1 : 0;
+    songSelected === 0 && pauseSong();
+    timer = 0;
+    loadSong();
+  }
   playing && songSelected.play();
   displayTimeBar();
   displayTimes();
@@ -179,16 +223,6 @@ const previousButton = () => {
 
 document.querySelector('.backward').addEventListener('click',previousButton);
 
-const jumpCurrent = e => {
-  console.log(e.target.value);
-  songSelected.currentTime = e.target.value;
-  timer = e.target.value;
-  displayTimeBar();
-  displayTimes();
-}
-
-document.querySelector('#progress-input').addEventListener('click',jumpCurrent);
-
 document.querySelector('.time').addEventListener('click',e => {
   timeLeft = !timeLeft;
   displayTimes();
@@ -198,10 +232,10 @@ document.querySelector('.time').addEventListener('click',e => {
 const toggleVolume = (index) => {
   switch (index) {
     case 0:
-      songSelected.volume < 1 && (songSelected.volume += .1)
+      songSelected.volume < 1 && (songSelected.volume += 0.05)
       break;
     case 1:
-      songSelected.volume >= .1 && (songSelected.volume -= .1)
+      songSelected.volume >= .05 && (songSelected.volume -= 0.05)
       break;
   }
 }
@@ -210,10 +244,10 @@ volumeButtons[0].addEventListener('click',e => toggleVolume(0));
 volumeButtons[1].addEventListener('click',e => toggleVolume(1));
 
 const handleRepeat = e => {
-  const classTarget = document.querySelector('.repeat').classList;
-  classTarget.value.includes('repeat-one') ? e.target.className = 'repeat' : 
-  (classTarget.value.includes('selected') ? classTarget.add('repeat-one') : classTarget.add('selected'));
+  const classTarget = repeatDom.classList;
+  repeatDom.className.includes('repeat-one') ? repeatDom.className = 'repeat' : 
+  (repeatDom.className.includes('selected') ? classTarget.add('repeat-one') : classTarget.add('selected'));
 }
 
 document.querySelector('.random').addEventListener('click',e => e.target.classList.toggle('selected'));
-document.querySelector('.repeat').addEventListener('click',handleRepeat);
+repeatDom.addEventListener('click',handleRepeat);

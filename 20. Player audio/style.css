@@ -6,6 +6,14 @@
   src: url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype")
 }
 
+@font-face {
+  font-family: 'Font Awesome 6 brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/fa-brands-400.woff2") format("woff2"), url("../fonts/fa-brands-400.ttf") format("truetype")
+}
+
 *, ::before, ::after {
   margin: 0;
   padding: 0;
@@ -79,12 +87,35 @@ p {
   height: 13em;
   border-radius: 1em;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .screen-container img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.no-picture {
+  border: solid .1em white;
+}
+
+.no-picture::before {
+  content: '\f3b5';
+  font-family: 'Font Awesome 6 brands';
+  font-weight: 400;
+  font-size: 6em;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  color: white;
+}
+
+.no-picture img {
+  display: none;
 }
 
 .title-container {
@@ -128,6 +159,7 @@ p {
 }
 
 .progress-bar {
+  cursor: pointer;
   overflow: hidden;
   position: relative;
   width: 94%;
@@ -136,15 +168,14 @@ p {
   border-radius: .2em;
 }
 
-#progress-input {
-  cursor: pointer;
+/* #progress-input {
   z-index: 99;
   position: absolute;
   width: 100%;
   top: 0;
   left: 0;
   opacity: 0;
-}
+} */
 
 .progress {
   position: absolute;
