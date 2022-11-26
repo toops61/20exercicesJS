@@ -41,11 +41,7 @@ body {
     font-size: 4.5vw;
   }
 }
-/* @media screen and (min-width: 2000px) {
-  body {
-    font-size: 1.5vw;
-  }
-} */
+
 p {
   color: #a5a5a5;
   font-size: .8em;
@@ -99,6 +95,7 @@ p {
 }
 
 .volume {
+  font-size: 100%;
   width: .4em;
   flex: 1;
   border: none;
@@ -193,15 +190,6 @@ p {
   background-color: rgb(199, 199, 199);
   border-radius: .2em;
 }
-
-/* #progress-input {
-  z-index: 99;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-} */
 
 .progress {
   position: absolute;

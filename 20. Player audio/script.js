@@ -55,8 +55,7 @@ const displayMetadata = tags => {
   const songName = tags.title;
   title.childNodes[3].textContent = songName;
   const album = tags.album;
-  title.childNodes[5].textContent = album
-  ;
+  title.childNodes[5].textContent = album;
 }
 
 //check songs metadata
@@ -80,11 +79,12 @@ const fillSongIndexDisplayed = () => {
 const loadSong = () => {
   songSelected.setAttribute('src',`./ressources/music/${songsArray[songSelectedIndex]}`);
   fillSongIndexDisplayed();
-  getTags();
+  songsArray.length && getTags();
 }
 
 //convert time to mm:ss format
 const convertTime = time => {
+  time = Math.round(time);
   const minutes = Math.floor(time/60);
   let seconds = Math.round(time%60);
   seconds < 10 && (seconds = `0${seconds}`);
