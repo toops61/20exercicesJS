@@ -30,6 +30,22 @@ body {
   align-items: center;
 }
 
+@media screen and (max-width: 900px) {
+  body {
+    font-size: 3.5vw;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    font-size: 4.5vw;
+  }
+}
+/* @media screen and (min-width: 2000px) {
+  body {
+    font-size: 1.5vw;
+  }
+} */
 p {
   color: #a5a5a5;
   font-size: .8em;
@@ -214,6 +230,10 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.controls-container button {
+  font-size: 100%;
 }
 
 .random {
